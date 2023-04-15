@@ -353,7 +353,7 @@ EndStructure
 
 
 Global TabBarGadgetInclude.TabBarGadgetInclude
-Declare TabBarGadget_Timer(Null.i)
+Declare TabBarGadget_Timer(null_.i)
 
 ; Diese Werte können sowohl im Include, als auch im Hauptcode später über TabBarGadgetInclude\Feld geändert werden.
 With TabBarGadgetInclude
@@ -2574,7 +2574,7 @@ EndProcedure
 
 
 ; Dauerschleife für das automatische Scrollen in der Navigation
-Procedure TabBarGadget_Timer(Null.i) ; Code OK
+Procedure TabBarGadget_Timer(null_.i) ; Code OK
   
   With TabBarGadgetInclude\Timer
     Repeat
@@ -3482,3 +3482,11 @@ EndProcedure
 
 
 
+
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 354
+; FirstLine = 327
+; Folding = --------------
+; Optimizer
+; EnableXP
+; DPIAware
