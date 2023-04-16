@@ -10,9 +10,9 @@
 ; used for portable code like the HighlightingEngine.or the FormDesigner
 ;
 #PUREBASIC_IDE = 1
+UseModule G
 
-
-CompilerIf #SpiderBasic
+CompilerIf #SPIDER_BASIC
   
   Enumeration
     #AppFormatWeb
@@ -91,7 +91,7 @@ Runtime Enumeration 1 ; 0 is reserved
   #WINDOW_StructureViewer
   #WINDOW_Compiler
   #WINDOW_Option
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     #WINDOW_CreateApp
   CompilerEndIf
   #WINDOW_Grep
@@ -479,7 +479,7 @@ Runtime Enumeration 1 ; 0 is reserved for uninitialized #PB_Any
   #GADGET_Preferences_IssueInBrowser ; last in loop
   #GADGET_Preferences_CodeFileExtensions
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     #GADGET_Preferences_WebBrowser
     #GADGET_Preferences_SelectWebBrowser
     #GADGET_Preferences_WebServerPort
@@ -566,7 +566,7 @@ Runtime Enumeration 1 ; 0 is reserved for uninitialized #PB_Any
   #GADGET_Option_UseCompiler  ; First to be disabled/enabled in "Main file" loop
   #GADGET_Option_SelectCompiler
   #GADGET_Option_Optimizer
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     #GADGET_Option_WindowTheme
     #GADGET_Option_SelectWindowTheme
     #GADGET_Option_GadgetTheme
@@ -861,7 +861,7 @@ Runtime Enumeration 1 ; 0 is reserved for uninitialized #PB_Any
   #GADGET_Help_Editor
   #GADGET_Help_Parent
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     #GADGET_WebApp_Name
     #GADGET_WebApp_Icon
     #GADGET_WebApp_SelectIcon
@@ -2036,7 +2036,7 @@ Structure CompileTarget
   ; - OutputFile$     - not used
   ; - ExecutableName$ - the last input from the "create executable" requester (full path)
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     AppFormat.l
     
     WindowTheme$
@@ -2577,7 +2577,7 @@ Global AboutWindowDialog.DialogWindow, AboutWindowPosition.DialogPosition
 Global PreferenceWindowDialog.DialogWindow, PreferenceWindowPosition.DialogPosition
 Global UpdateWindowDialog.DialogWindow, UpdateWindowPosition.DialogPosition
 
-CompilerIf #SpiderBasic
+CompilerIf #SPIDER_BASIC
   Global CreateAppWindowDialog.DialogWindow, CreateAppWindowPosition.DialogPosition
 CompilerEndIf
 
@@ -2587,7 +2587,7 @@ Global OptionNewLineType, OptionSubSystem$, OptionErrorLog, OptionEncoding
 Global OptionUseCompileCount, OptionUseBuildCount, OptionUseCreateExe, OptionTemporaryExe
 Global OptionCustomCompiler, OptionCompilerVersion$
 
-CompilerIf #SpiderBasic
+CompilerIf #SPIDER_BASIC
   Global OptionWebBrowser$, OptionWebServerPort, OptionJDK$, OptionAppleTeamID$
 CompilerEndIf
 
@@ -2864,3 +2864,10 @@ CompilerEndIf
 
 UseMD5Fingerprint()
 UseCRC32Fingerprint()
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 2546
+; FirstLine = 2546
+; Folding = -----
+; Optimizer
+; EnableXP
+; DPIAware

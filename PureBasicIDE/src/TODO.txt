@@ -4,6 +4,7 @@
 	Créer un enum pour les granularités car désormais on va storer les paramètres en U8 plutot que STRING
 
 [MVP] Création nouveaux fichiers: Prompter le type de fichier (défaut PB) + ajout au projet automatique quand en mode projet
+[MVP] Mettre des tests
 [MVP] Amélioration majeure de l'autocomplete
 [MVP] Reach token definition by control + click
 [MVP] Refactor:rename a token and automatically rename that specific token across sources

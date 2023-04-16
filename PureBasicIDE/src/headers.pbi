@@ -8,6 +8,7 @@ XIncludeFile "global.pb"
 CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "empire\empire.pb"
 	XIncludeFile "util\crc32.pb"
+	XIncludeFile "util\macros.pb"
 	
 	XIncludeFile "__unsorted__.pb"
 	
@@ -63,10 +64,13 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "ui\statusbar.pb"
 	XIncludeFile "ui\menu.pb"
 	
+	;- APIs
 	XIncludeFile "api\tool_api.pb"
+	XIncludeFile "api\dialog_window_api.pb"
 CompilerElse
 	XIncludeFile "empire/empire.pb"
 	XIncludeFile "util/crc32.pb"
+	XIncludeFile "util/macros.pb"
 	
 	XIncludeFile "__unsorted__.pb"
 	
@@ -122,29 +126,38 @@ CompilerElse
 	XIncludeFile "ui/statusbar.pb"
 	XIncludeFile "ui/menu.pb"
 	
+	;- APIs
 	XIncludeFile "api/tool_api.pb"
+	XIncludeFile "api/dialog_window_api.pb"
 CompilerEndIf
 
-CompilerIf #PB_Compiler_OS = #PB_OS_Windows
-	XIncludeFile "..\CompilerFlags.pb"
-CompilerElse
-	XIncludeFile "../CompilerFlags.pb"
-CompilerEndIf
+; CompilerIf #PB_Compiler_OS = #PB_OS_Windows
+; 	XIncludeFile "..\CompilerFlags.pb"
+; CompilerElse
+; 	XIncludeFile "../CompilerFlags.pb"
+; CompilerEndIf
 
-XIncludeFile ".." + #Separator + "Build/BuildInfo.pb"
-XIncludeFile ".." + #Separator + ".." + #Separator + "DialogManager" + #Separator + "Common.pb" ; must be before Common.pb
-XIncludeFile ".." + #Separator + "Common.pb"                                                    ; must be before DebuggerCommon.pb
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "DebuggerCommon.pb"                  ; must be before Declarations.pb
-XIncludeFile ".." + #Separator + "Declarations.pb"
-XIncludeFile ".." + #Separator + "Macro.pb"
-XIncludeFile ".." + #Separator + ".." + #Separator + "PureBasicConfigPath.pb" ; for the config directory
-XIncludeFile ".." + #Separator + "FormDesigner/declare.pb"
+; XIncludeFile ".." + Path::#SEPARATOR + "Build/BuildInfo.pb"
+; TODO: temporary:
+#BUILDINFO_User = "roger gaston"
+#BUILDINFO_Branch = "branche"
+#BUILDINFO_Revision = "revision"
+#BUILDINFO_Version = "123"
+; TODO: end of temporary
+
+XIncludeFile ".." + Path::#SEPARATOR + ".." + Path::#SEPARATOR + "DialogManager" + Path::#SEPARATOR + "Common.pb" ; must be before Common.pb
+XIncludeFile ".." + Path::#SEPARATOR + "Common.pb"                                                    ; must be before DebuggerCommon.pb
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "DebuggerCommon.pb"                  ; must be before Declarations.pb
+XIncludeFile ".." + Path::#SEPARATOR + "Declarations.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Macro.pb"
+XIncludeFile ".." + Path::#SEPARATOR + ".." + Path::#SEPARATOR + "PureBasicConfigPath.pb" ; for the config directory
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/declare.pb"
 ; must be here to affect all OpenWindow() calls with a macro
-XIncludeFile ".." + #Separator + "LinuxWindowIcon.pb"
-XIncludeFile ".." + #Separator + "ZLib.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "LinuxWindowIcon.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ZLib.pb"
 
 ; include the TabBarGadget. Note: It has an EnableExplicit inside
-XIncludeFile ".." + #Separator + "TabBarGadget.pbi"
+XIncludeFile ".." + Path::#SEPARATOR + "TabBarGadget.pbi"
 DisableExplicit
 
 ; dialog manager
@@ -152,125 +165,125 @@ DisableExplicit
 #DIALOG_USE_SCINTILLA = 1
 #DIALOG_USE_EXPLORER  = 1
 
-IncludePath ".." + #Separator + ".." + #Separator + "DialogManager" + #Separator ; so that the dialog manager files are found
+IncludePath ".." + Path::#SEPARATOR + ".." + Path::#SEPARATOR + "DialogManager" + Path::#SEPARATOR ; so that the dialog manager files are found
 XIncludeFile "DialogManager.pb"
 IncludePath ""
 
 ; debugging functions and macros (mostly active in debug mode only)
-XIncludeFile ".." + #Separator + "WindowsDebugging.pb"
-XIncludeFile ".." + #Separator + "LinuxDebugging.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "WindowsDebugging.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "LinuxDebugging.pb"
 
 ; should be before the debugger files, as they need some of this
-XIncludeFile ".." + #Separator + "WindowsExtensions.pb"
-XIncludeFile ".." + #Separator + "LinuxExtensions.pb"
-XIncludeFile ".." + #Separator + "MacExtensions.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "WindowsExtensions.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "LinuxExtensions.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "MacExtensions.pb"
 
 ; debugger external files
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "Misc.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "VariableGadget.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "Communication_PipeWindows.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "Communication_PipeUnix.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "Communication.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "DebugOutput.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "AsmDebug.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "MemoryViewer.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "VariableDebug.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "History.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "WatchList.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "DataBreakPoints.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "Profiler.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "LibraryViewer.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "Purifier.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "DebuggerGUI.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "Misc.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "VariableGadget.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "Communication_PipeWindows.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "Communication_PipeUnix.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "Communication.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "DebugOutput.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "AsmDebug.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "MemoryViewer.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "VariableDebug.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "History.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "WatchList.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "DataBreakPoints.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "Profiler.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "LibraryViewer.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "Purifier.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "DebuggerGUI.pb"
 
 
 ; Plugins for the LibraryViewer
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "Plugin_Image.pb"
-XIncludeFile ".." + #Separator + #DEFAULT_DebuggerSource + "Plugin_Xml.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "Plugin_Image.pb"
+XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "Plugin_Xml.pb"
 
 
 ; debugger ide-files
-XIncludeFile ".." + #Separator + "IDEDebugger.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "IDEDebugger.pb"
 
-XIncludeFile ".." + #Separator + "CompilerInterface.pb"
-XIncludeFile ".." + #Separator + "Language.pb"
-XIncludeFile ".." + #Separator + "ZipManagement.pb"
-XIncludeFile ".." + #Separator + "ToolbarManagement.pb"
-XIncludeFile ".." + #Separator + "ThemeManagement.pb"
-XIncludeFile ".." + #Separator + "HighlightingEngine.pb"
-XIncludeFile ".." + #Separator + "HighlightingFunctions.pb"
-XIncludeFile ".." + #Separator + "ShortcutManagement.pb"
-XIncludeFile ".." + #Separator + "ProjectManagement.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/grid.pbi"
-XIncludeFile ".." + #Separator + "FormDesigner/undoredo.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/helpingfunctions.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/gadgetitemswindow.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/imageslistwindow.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/splitterwindow.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/codeviewer.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/mainevents.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/copypaste.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/opensave.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/mainwindow.pb"
-XIncludeFile ".." + #Separator + "FormDesigner/FormManagement.pb"
-XIncludeFile ".." + #Separator + "SourceManagement.pb"
-XIncludeFile ".." + #Separator + "SourceParser.pb"
-XIncludeFile ".." + #Separator + "UserInterface.pb"
-XIncludeFile ".." + #Separator + "Misc.pb"
-XIncludeFile ".." + #Separator + "FileSystem.pb"
-XIncludeFile ".." + #Separator + "IDEMisc.pb"
-XIncludeFile ".." + #Separator + "RecentFiles.pb"
-XIncludeFile ".." + #Separator + "AddTools.pb"
-XIncludeFile ".." + #Separator + "AboutWindow.pb"
-XIncludeFile ".." + #Separator + "FileViewer.pb"
-XIncludeFile ".." + #Separator + "GotoWindow.pb"
-XIncludeFile ".." + #Separator + "StructureViewer.pb"
-XIncludeFile ".." + #Separator + "StructureFunctions.pb"
-XIncludeFile ".." + #Separator + "FindWindow.pb"
-XIncludeFile ".." + #Separator + "GrepWindow.pb"
-XIncludeFile ".." + #Separator + "CompilerWindow.pb"
-XIncludeFile ".." + #Separator + "CompilerWarnings.pb"
-XIncludeFile ".." + #Separator + "CompilerOptions.pb"
-XIncludeFile ".." + #Separator + "AddHelpFiles.pb"
-XIncludeFile ".." + #Separator + "AutoComplete.pb"
-XIncludeFile ".." + #Separator + "Preferences.pb"
-XIncludeFile ".." + #Separator + "Preferences.pb"
-XIncludeFile ".." + #Separator + "StandaloneDebuggerControl.pb"
-XIncludeFile ".." + #Separator + "ErrorHandler.pb"
-XIncludeFile ".." + #Separator + "Commandline.pb"
-XIncludeFile ".." + #Separator + "DiffAlgorithm.pb"
-XIncludeFile ".." + #Separator + "DiffWindow.pb"
-XIncludeFile ".." + #Separator + "LinuxHelp.pb"
-XIncludeFile ".." + #Separator + "EditHistory.pb"
-XIncludeFile ".." + #Separator + "UpdateCheck.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "CompilerInterface.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Language.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ZipManagement.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ToolbarManagement.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ThemeManagement.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "HighlightingEngine.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "HighlightingFunctions.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ShortcutManagement.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ProjectManagement.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/grid.pbi"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/undoredo.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/helpingfunctions.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/gadgetitemswindow.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/imageslistwindow.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/splitterwindow.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/codeviewer.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/mainevents.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/copypaste.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/opensave.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/mainwindow.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/FormManagement.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "SourceManagement.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "SourceParser.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "UserInterface.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Misc.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FileSystem.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "IDEMisc.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "RecentFiles.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "AddTools.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "AboutWindow.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FileViewer.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "GotoWindow.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "StructureViewer.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "StructureFunctions.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "FindWindow.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "GrepWindow.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "CompilerWindow.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "CompilerWarnings.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "CompilerOptions.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "AddHelpFiles.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "AutoComplete.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Preferences.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Preferences.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "StandaloneDebuggerControl.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ErrorHandler.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Commandline.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "DiffAlgorithm.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "DiffWindow.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "LinuxHelp.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "EditHistory.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "UpdateCheck.pb"
 
 CompilerIf #SpiderBasic
-  XIncludeFile ".." + #Separator + "CreateApp.pb"
+  XIncludeFile ".." + Path::#SEPARATOR + "CreateApp.pb"
 CompilerEndIf
 
 ; compiled dialogs
-XIncludeFile ".." + #Separator + "Build/Find.pb"
-XIncludeFile ".." + #Separator + "Build/Grep.pb"
-XIncludeFile ".." + #Separator + "Build/Diff.pb"
-XIncludeFile ".." + #Separator + "Build/Goto.pb"
-XIncludeFile ".." + #Separator + "Build/AddTools.pb"
-XIncludeFile ".." + #Separator + "Build/About.pb"
-XIncludeFile ".." + #Separator + "Build/Preferences.pb"
-XIncludeFile ".." + #Separator + "Build/Templates.pb"
-XIncludeFile ".." + #Separator + "Build/StructureViewer.pb"
-XIncludeFile ".." + #Separator + "Build/Projects.pb"
-XIncludeFile ".." + #Separator + "Build/Build.pb"
-XIncludeFile ".." + #Separator + "Build/FileMonitor.pb"
-XIncludeFile ".." + #Separator + "Build/History.pb"
-XIncludeFile ".." + #Separator + "Build/HistoryShutdown.pb"
-XIncludeFile ".." + #Separator + "Build/Updates.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/Find.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/Grep.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/Diff.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/Goto.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/AddTools.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/About.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/Preferences.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/Templates.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/StructureViewer.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/Projects.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/Build.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/FileMonitor.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/History.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/HistoryShutdown.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Build/Updates.pb"
 
 CompilerIf #SpiderBasic
-  XIncludeFile ".." + #Separator + "Build/CreateApp.pb"
+  XIncludeFile ".." + Path::#SEPARATOR + "Build/CreateApp.pb"
 CompilerEndIf
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 118
-; FirstLine = 49
+; CursorPosition = 72
+; FirstLine = 9
 ; Folding = -
 ; Optimizer
 ; EnableXP
