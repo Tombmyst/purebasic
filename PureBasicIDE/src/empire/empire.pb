@@ -1,4 +1,5 @@
 ﻿XIncludeFile "string_util.pb"
+XIncludeFile "math.pb"
 
 XIncludeFile "fs_path.pb"
 
@@ -8,7 +9,7 @@ XIncludeFile "fs_path.pb"
 ; 	
 ; CompilerEndIf
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 2
+; CursorPosition = 1
 ; Optimizer
 ; EnableXP
 ; DPIAware

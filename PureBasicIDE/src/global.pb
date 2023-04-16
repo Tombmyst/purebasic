@@ -14,6 +14,9 @@ EndMacro
 ;
 #PUREBASIC_IDE = 1
 
+UseMD5Fingerprint()
+UseCRC32Fingerprint()
+
 
 DeclareModule G
 	Macro false : 0 : EndMacro
@@ -370,8 +373,7 @@ EndDeclareModule
 
 Module G : EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 328
-; FirstLine = 292
+; CursorPosition = 17
 ; Folding = ---
 ; Optimizer
 ; EnableXP

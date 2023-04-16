@@ -7,6 +7,8 @@ XIncludeFile "global.pb"
 
 CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "empire\empire.pb"
+	XIncludeFile "util\crc32.pb"
+	
 	XIncludeFile "__unsorted__.pb"
 	
 	;- Windows ENUMS
@@ -55,12 +57,17 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "ide\updater\updater.pb"
 	XIncludeFile "ide\issues_viewer.pb"
 	XIncludeFile "ide\diff.pb"
+	XIncludeFile "ide\debugger\debugger.pb"
 	
 	XIncludeFile "ui\toolbar.pb"
+	XIncludeFile "ui\statusbar.pb"
+	XIncludeFile "ui\menu.pb"
 	
 	XIncludeFile "api\tool_api.pb"
 CompilerElse
 	XIncludeFile "empire/empire.pb"
+	XIncludeFile "util/crc32.pb"
+	
 	XIncludeFile "__unsorted__.pb"
 	
 	;- ENUMS
@@ -109,8 +116,11 @@ CompilerElse
 	XIncludeFile "ide/updater/updater.pb"
 	XIncludeFile "ide/issues_viewer.pb"
 	XIncludeFile "ide/diff.pb"
+	XIncludeFile "ide/debugger/debugger.pb"
 	
 	XIncludeFile "ui/toolbar.pb"
+	XIncludeFile "ui/statusbar.pb"
+	XIncludeFile "ui/menu.pb"
 	
 	XIncludeFile "api/tool_api.pb"
 CompilerEndIf
@@ -259,8 +269,8 @@ CompilerIf #SpiderBasic
   XIncludeFile ".." + #Separator + "Build/CreateApp.pb"
 CompilerEndIf
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 110
-; FirstLine = 42
+; CursorPosition = 118
+; FirstLine = 49
 ; Folding = -
 ; Optimizer
 ; EnableXP
