@@ -7,8 +7,10 @@ XIncludeFile "global.pb"
 
 CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "empire\empire.pb"
+	XIncludeFile "util\error_codes.pb"
 	XIncludeFile "util\crc32.pb"
 	XIncludeFile "util\macros.pb"
+	XIncludeFile "util\dialogs_util.pb"
 	
 	XIncludeFile "__unsorted__.pb"
 	
@@ -23,16 +25,16 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "ide\theme\theme_constants.pb"
 	XIncludeFile "ide\tools\enums.pb"
 	XIncludeFile "xml\enums.pb"
-	
+
 	; -> should be after most of the constants imports because it uses other constants defined elsewhere
 	XIncludeFile "images\enums.pb"
 	XIncludeFile "ui\enums.pb"
 	
 	XIncludeFile "fs\zip.pb"
-		
+
 	XIncludeFile "ide\resources.pb"
 	XIncludeFile "ide\settings.pb"
-	
+
 	XIncludeFile "ide\scintilla_impl\ide_sci_constants.pb"
 	
 	XIncludeFile "pb_analyzer\token.pb"
@@ -69,8 +71,10 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "api\dialog_window_api.pb"
 CompilerElse
 	XIncludeFile "empire/empire.pb"
+	XIncludeFile "util/error_codes.pb"
 	XIncludeFile "util/crc32.pb"
 	XIncludeFile "util/macros.pb"
+	XIncludeFile "util/dialogs_util.pb"
 	
 	XIncludeFile "__unsorted__.pb"
 	
@@ -281,9 +285,45 @@ XIncludeFile ".." + Path::#SEPARATOR + "Build/Updates.pb"
 CompilerIf #SpiderBasic
   XIncludeFile ".." + Path::#SEPARATOR + "Build/CreateApp.pb"
 CompilerEndIf
+
+IncludeFile ".." + Path::#SEPARATOR + "Build/CompilerOptions.pb"
+#IDE_ProjectCompilerOptions = 1
+IncludeFile ".." + Path::#SEPARATOR + "Build/CompilerOptions.pb"
+
+
+; toolspanel plugins
+XIncludeFile ".." + Path::#SEPARATOR + "AsciiTable.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Explorer.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ProjectPanel.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ColorPicker.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ProcedureBrowser.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "VariableViewer.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "HelpTool.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Issues.pb"
+
+; windows specific
+XIncludeFile ".." + Path::#SEPARATOR + "WindowsMisc.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "WindowsHelp.pb"
+
+; linux specific
+XIncludeFile ".." + Path::#SEPARATOR + "LinuxMisc.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "HelpViewer.pb"
+
+; macos specific
+XIncludeFile ".." + Path::#SEPARATOR + "MacMisc.pb"
+
+; highlighting files
+XIncludeFile ".." + Path::#SEPARATOR + "ScintillaHighlighting.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "CodeViewer.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "DisplayMacroError.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "Templates.pb"
+XIncludeFile ".." + Path::#SEPARATOR + "ToolsPanel.pb"
+
+; crossplatform debugging helpers
+XIncludeFile ".." + Path::#SEPARATOR + "Debugging.pb"
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 245
-; FirstLine = 204
+; CursorPosition = 73
+; FirstLine = 12
 ; Folding = -
 ; Optimizer
 ; EnableXP

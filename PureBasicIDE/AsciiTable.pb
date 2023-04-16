@@ -5,7 +5,7 @@
 ; --------------------------------------------------------------------------------------------
 
 
-Structure AsciiTableStructure Extends ToolsPanelEntry
+Structure AsciiTableStructure Extends ToolAPI::ToolsPanelEntry
   AsciiTableMode.l
 EndStructure
 
@@ -193,3 +193,10 @@ DataSection
   Data$ "&eth;", "&ntilde;", "&ograve;", "&oacute;", "&ocirc;", "&otilde;", "&ouml;", "&divide;", "&oslash;", "&ugrave;", "&uacute;", "&ucirc;", "&uuml;", "&yacute;", "&thorn;", "&yuml;"
   
 EndDataSection
+
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 6
+; Folding = -
+; Optimizer
+; EnableXP
+; DPIAware

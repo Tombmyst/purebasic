@@ -19,49 +19,13 @@ CompilerEndIf
 ;   To not get a duplicate label error, the generated label in the file is actually
 ;   a macro which is replaced with the real label on compilation
 ;
-Macro Dialog_CompilerOptionsMacro()
-  CompilerIf Defined(IDE_ProjectCompilerOptions, #PB_Constant)
-    Dialog_ProjectCompilerOptions:
-  CompilerElse
-    Dialog_CompilerOptions:
-  CompilerEndIf
-EndMacro
-
-IncludeFile "Build/CompilerOptions.pb"
-#IDE_ProjectCompilerOptions = 1
-IncludeFile "Build/CompilerOptions.pb"
-
-
-; toolspanel plugins
-XIncludeFile "AsciiTable.pb"
-XIncludeFile "Explorer.pb"
-XIncludeFile "ProjectPanel.pb"
-XIncludeFile "ColorPicker.pb"
-XIncludeFile "ProcedureBrowser.pb"
-XIncludeFile "VariableViewer.pb"
-XIncludeFile "HelpTool.pb"
-XIncludeFile "Issues.pb"
-
-; windows specific
-XIncludeFile "WindowsMisc.pb"
-XIncludeFile "WindowsHelp.pb"
-
-; linux specific
-XIncludeFile "LinuxMisc.pb"
-XIncludeFile "HelpViewer.pb"
-
-; macos specific
-XIncludeFile "MacMisc.pb"
-
-; highlighting files
-XIncludeFile "ScintillaHighlighting.pb"
-XIncludeFile "CodeViewer.pb"
-XIncludeFile "DisplayMacroError.pb"
-XIncludeFile "Templates.pb"
-XIncludeFile "ToolsPanel.pb"
-
-; crossplatform debugging helpers
-XIncludeFile "Debugging.pb"
+; Macro Dialog_CompilerOptionsMacro()
+;   CompilerIf Defined(IDE_ProjectCompilerOptions, #PB_Constant)
+;     Dialog_ProjectCompilerOptions:
+;   CompilerElse
+;     Dialog_CompilerOptions:
+;   CompilerEndIf
+; EndMacro
 
 ;W__time.q = ElapsedMilliseconds()
 
@@ -648,9 +612,9 @@ DataSection
 EndDataSection
 
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 10
-; FirstLine = 2
-; Folding = ----
+; CursorPosition = 31
+; FirstLine = 17
+; Folding = ---
 ; Optimizer
 ; EnableXP
 ; DPIAware

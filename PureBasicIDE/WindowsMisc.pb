@@ -114,28 +114,33 @@ CompilerIf #CompileWindows
     
     ; initialize the scintilla dll. if it does not work, output a proper message,
     ; otherwise the ide acts quite weird.
-    ;
-    If InitScintilla(PureBasicPath$+"Compilers\Scintilla.dll") = 0
-      MessageRequester(#ProductName$, "Cannot initialize Scintilla engine!"+#NewLine+"Make sure the 'Scintilla.dll' is placed in the 'Compilers' subdirectory of your "+#ProductName$+" setup.", #FLAG_Error)
-      End
+	;
+    If InitScintilla(Resources::bin_path_join_1("Scintilla.dll")) = false
+    	; TODO: change error message
+    	MessageRequester(#ProductName$, "Cannot initialize Scintilla engine!"+#NewLine+"Make sure the 'Scintilla.dll' is placed in the 'Compilers' subdirectory of your "+#ProductName$+" setup.", #FLAG_Error)
+    	End
     EndIf
+;     If InitScintilla(PureBasicPath$+"Compilers\Scintilla.dll") = 0
+;       MessageRequester(#ProductName$, "Cannot initialize Scintilla engine!"+#NewLine+"Make sure the 'Scintilla.dll' is placed in the 'Compilers' subdirectory of your "+#ProductName$+" setup.", #FLAG_Error)
+;       End
+;     EndIf
     
     TempPath$        = GetTemporaryDirectory()
     
     If PreferencesFile$ = "" ; Only change if not set by commandline
-      PreferencesFile$ = PureBasicConfigPath() + #PreferenceFileName$
+      PreferencesFile$ = Resources::configuration_path_join_1(#PreferenceFileName$)
     EndIf
     
     If AddToolsFile$ = "" ; Only change if not set by commandline
-      AddToolsFile$    = PureBasicConfigPath() + "Tools.prefs"
+      AddToolsFile$    = Resources::configuration_path_join_1("Tools.prefs")
     EndIf
     
     If TemplatesFile$ = "" ; Only change if not set by commandline
-      TemplatesFile$   = PureBasicConfigPath() + "Templates.prefs"
+      TemplatesFile$   = Resources::configuration_path_join_1("Templates.prefs")
     EndIf
     
     If HistoryDatabaseFile$ = "" ; Only change if not set by commandline
-      HistoryDatabaseFile$ = PureBasicConfigPath() + "History.db"
+      HistoryDatabaseFile$ = Resources::configuration_path_join_1("History.db")
     EndIf
     
     If SourcePathSet = 0 ; Only change if not set by commandline
@@ -833,3 +838,11 @@ CompilerIf #CompileWindows
   
   
 CompilerEndIf
+
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 102
+; FirstLine = 87
+; Folding = -----
+; Optimizer
+; EnableXP
+; DPIAware
