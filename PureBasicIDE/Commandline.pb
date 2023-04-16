@@ -462,14 +462,14 @@ Procedure ParseCommandline()
   Next ParameterIndex
   
   If UpdateCheckFile$ = ""
-    UpdateCheckFile$ = PureBasicConfigPath() + "UpdateCheck.xml" ; Warning PureBasicConfigPath() create the directory if not exists, so don't call it if we use the /PORTABLE or /LOCAL flag
+    UpdateCheckFile$ = Resources::configuration_path_join_1("UpdateCheck.xml") ; Warning PureBasicConfigPath() create the directory if not exists, so don't call it if we use the /PORTABLE or /LOCAL flag
   EndIf
   
 EndProcedure
 
 
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 464
+; CursorPosition = 394
 ; FirstLine = 391
 ; Folding = --
 ; Optimizer
