@@ -463,7 +463,7 @@ DataSection
   Data$ "NoDebuggerCompile","Compile without Debugger"
   Data$ "RestartCompiler",  "Re&start Compiler"
   Data$ "CompilerOptions",  "Compiler &Options..."
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     Data$ "CreateEXE",        "&Create App..."
   CompilerElse
     Data$ "CreateEXE",        "Create &Executable..."
@@ -592,7 +592,7 @@ DataSection
   Data$ "NewForm",          "<New Form>"
   Data$ "OpenFileTitle",    "Choose a file to open..."
   Data$ "SaveFileTitle",    "Save source code as..."
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     Data$ "Pattern",          "SpiderBasic Files (*.sb, *.sbi, *.sbp, *.sbf)|*.sb;*.sbi;*.sbp;*.sbf|SpiderBasic Sourcecodes (*.sb)|*.sb|SpiderBasic Includefiles (*.sbi)|*.sbi|SpiderBasic Projects (*.sbp)|*.sbp|Spiderbasic Forms (*.sbf)|*.sbf|All Files (*.*)|*.*"
   CompilerElse
     Data$ "Pattern",          "PureBasic Files (*.pb, *.pbi, *.pbp, *.pbf)|*.pb;*.pbi;*.pbp;*.pbf|PureBasic Sourcecodes (*.pb)|*.pb|PureBasic Includefiles (*.pbi)|*.pbi|PureBasic Projects (*.pbp)|*.pbp|Purebasic Forms (*.pbf)|*.pbf|All Files (*.*)|*.*"
@@ -696,7 +696,7 @@ DataSection
   
   Data$ "AddDirectory",     "Should the content of the following directory be added to the project ?"
   Data$ "AddManyFiles",     "Do you really want to add %filecount% files to the project?"
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     Data$ "Pattern",          "SpiderBasic Projects (*.sbp)|*.sbp|All files (*.*)|*.*"
   CompilerElse
     Data$ "Pattern",          "PureBasic Projects (*.pbp)|*.pbp|All files (*.*)|*.*"
@@ -781,7 +781,7 @@ DataSection
   Data$ "SubSystem",        "Library Subsystem"
   Data$ "SaveSettings",     "Save Settings to"
   Data$ "SaveSettings0",    "The end of the Source file"
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     Data$ "SaveSettings1",    "The file <filename>.sb.cfg"
   CompilerElse
     Data$ "SaveSettings1",    "The file <filename>.pb.cfg"
@@ -813,7 +813,7 @@ DataSection
   Data$ "ShowIndentGuides", "Show indentation guides"
   Data$ "UseTabIndentForSplittedLines", "Use tab indent for splitted lines"
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     Data$ "Color0",         "Inline Javascript"
   CompilerElse
     Data$ "Color0",         "ASM Keywords"
@@ -965,7 +965,7 @@ DataSection
   Data$ "Option_Module",    "Modules"
   
   Data$ "Option_PBKeywords",  "Keywords"
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     Data$ "Option_ASMKeywords", "Inline Javascript"
   CompilerElse
     Data$ "Option_ASMKeywords", "ASM Keywords"
@@ -1085,7 +1085,7 @@ DataSection
   Data$ "IssueInBrowser",   "Show in procedure browser"
   Data$ "InvalidExpr",      "Invalid regular expression"
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     Data$ "WebBrowser",  "Web browser"
     Data$ "WebServerPort",  "Default web server port"
     Data$ "JDK",  "JDK 8 path (JDK 9+ not supported)"
@@ -1267,7 +1267,7 @@ DataSection
   Data$ "OpenLinkerFile",   "Choose a file with linker options..."
   Data$ "Optimizer",      "Optimize generated code"
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     Data$ "WindowTheme",     "Theme for windows"
     Data$ "GadgetTheme",     "Theme for gadgets"
     Data$ "WebServerAddress",   "Web server address"
@@ -1382,7 +1382,7 @@ DataSection
   Data$ "TargetBuildError", "Error building '%target%'"
   
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     
     ; ===================================================
     ;- Group - Resources
@@ -2168,7 +2168,7 @@ DataSection
   Data$ "ResizeGadgetImg",      "Do you want to resize the gadget to the image size?"
   Data$ "SelectImage",          "Select Image..."
   Data$ "MaskAllFiles",         "All files (*.*)|*.*"
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     Data$ "MaskPBF",              "SpiderBasic Form (*.sbf)|*.sbf"
     Data$ "MaskPB",               "SpiderBasic File (*.sb)|*.sb;*.sbi"
   CompilerElse
@@ -2259,3 +2259,10 @@ DataSection
   ; ===================================================
   
 EndDataSection
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 2170
+; FirstLine = 2092
+; Folding = ----
+; Optimizer
+; EnableXP
+; DPIAware

@@ -1,9 +1,9 @@
 ﻿DeclareModule UIMenu
-	Declare.u getMenuHeight()  ; REPLACES: Commons::MenuHeight at 2514
+	Declare.u get_menu_height()  ; REPLACES: Commons::MenuHeight at 2514
 EndDeclareModule
 
 Module UIMenu
-	Procedure.u getMenuHeight()
+	Procedure.u get_menu_height()
 		; TODO
 	EndProcedure
 EndModule

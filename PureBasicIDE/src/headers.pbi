@@ -150,7 +150,7 @@ XIncludeFile ".." + Path::#SEPARATOR + "Common.pb"                              
 XIncludeFile ".." + Path::#SEPARATOR + #DEFAULT_DebuggerSource + "DebuggerCommon.pb"                  ; must be before Declarations.pb
 XIncludeFile ".." + Path::#SEPARATOR + "Declarations.pb"
 XIncludeFile ".." + Path::#SEPARATOR + "Macro.pb"
-XIncludeFile ".." + Path::#SEPARATOR + ".." + Path::#SEPARATOR + "PureBasicConfigPath.pb" ; for the config directory
+;XIncludeFile ".." + Path::#SEPARATOR + ".." + Path::#SEPARATOR + "PureBasicConfigPath.pb" ; for the config directory
 XIncludeFile ".." + Path::#SEPARATOR + "FormDesigner/declare.pb"
 ; must be here to affect all OpenWindow() calls with a macro
 XIncludeFile ".." + Path::#SEPARATOR + "LinuxWindowIcon.pb"
@@ -282,8 +282,8 @@ CompilerIf #SpiderBasic
   XIncludeFile ".." + Path::#SEPARATOR + "Build/CreateApp.pb"
 CompilerEndIf
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 72
-; FirstLine = 9
+; CursorPosition = 245
+; FirstLine = 204
 ; Folding = -
 ; Optimizer
 ; EnableXP

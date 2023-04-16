@@ -4,7 +4,7 @@
 ;  See LICENSE and LICENSE-FANTAISIE in the project root for license information.
 ; --------------------------------------------------------------------------------------------
 
-CompilerIf #SpiderBasic
+CompilerIf #SPIDER_BASIC
   #NB_ToolbarMenuItems = 99-24 ; menu items specified in the datasection
 CompilerElse
   #NB_ToolbarMenuItems = 99 ; menu items specified in the datasection
@@ -524,13 +524,13 @@ DataSection
   Data.l #MENU_NoDebuggerCompile:   Data$ "Menu:NoDebuggerCompile"
   Data.l #MENU_RestartCompiler:     Data$ "Menu:RestartCompiler"
   Data.l #MENU_CompilerOption:      Data$ "Menu:CompilerOptions"
-  CompilerIf Not #SpiderBasic
+  CompilerIf Not #SPIDER_BASIC
     Data.l #MENU_CreateExecutable:    Data$ "Menu:CreateEXE"
   CompilerEndIf
   Data.l #MENU_BuildAllTargets:     Data$ "Menu:BuildAllTargets"
   
   Data.l #MENU_Debugger:            Data$ "Menu:Debugger"
-  CompilerIf Not #SpiderBasic
+  CompilerIf Not #SPIDER_BASIC
     Data.l #MENU_Stop:                Data$ "Menu:Stop"
     Data.l #MENU_Run:                 Data$ "Menu:Run"
     Data.l #MENU_Step:                Data$ "Menu:Step"
@@ -623,3 +623,10 @@ DataSection
   Data$ "Menu:Kill",      "Menu:Kill"
   
 EndDataSection
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 532
+; FirstLine = 454
+; Folding = --
+; Optimizer
+; EnableXP
+; DPIAware

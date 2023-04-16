@@ -2,6 +2,7 @@
 XIncludeFile "math.pb"
 
 XIncludeFile "fs_path.pb"
+XIncludeFile "file_system.pb"
 
 ; CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 ; 	
@@ -9,7 +10,7 @@ XIncludeFile "fs_path.pb"
 ; 	
 ; CompilerEndIf
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 1
+; CursorPosition = 4
 ; Optimizer
 ; EnableXP
 ; DPIAware

@@ -18,3 +18,10 @@
 [NTH] Background image
 [NTH] Custom UI
 [NTH] Integrate MAKE for more complex compilations
+
+
+
+Standards:
+Consts 					-> UPPER_CASE
+Modules 				-> PascalCase
+Functions, params, vars -> snake_case (avoid clashes with PB builtins)

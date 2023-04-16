@@ -1,10 +1,49 @@
 ﻿DeclareModule Resources
 	Declare load()
+	
+	Declare.s get_configuration_path()
+	
+	Macro configuration_path_join_1(path_element)
+		Path::join(Resources::get_configuration_path(), path_element)
+	EndProcedure
 EndDeclareModule
 
 Module Resources : UseModule G
+	Global _cached_configuration_path.s = ""
+	
 	Procedure load()
 		
+	EndProcedure
+	
+	Procedure.s get_configuration_path()  ; REPLACES: all of PureBasicConfigPath.pb
+		If (_cached_configuration_path <> "")
+			ProcedureReturn _cached_configuration_path
+		EndIf
+		
+		Protected configuration_path.s
+		CompilerIf #SPIDER_BASIC
+			CompilerIf #PB_Compiler_OS = #PB_OS_Windows
+				configuration_path = Path::join(GetHomeDirectory(), "SpiderBasic")
+			CompilerElse
+				configuration_path = Path::join(GetHomeDirectory(), ".spiderbasic")
+			CompilerEndIf
+		CompilerElse
+			CompilerIf #PB_Compiler_OS = #PB_OS_Windows
+				configuration_path = Path::join(GetHomeDirectory(), "PureBasic")
+			CompilerElse
+				configuration_path = Path::join(GetHomeDirectory(), ".purebasic")
+			CompilerEndIf
+		CompilerEndIf
+		
+		If (Not FileSystem::is_directory(configuration_path))
+			If (Not CreateDirectory(configuration_path))
+				MessageRequester("Fatal Error", "Could not create configuration directory at " + configuration_path)
+				ProcedureReturn ""
+			EndIf
+		EndIf
+		
+		_cached_configuration_path = configuration_path
+		ProcedureReturn configuration_path
 	EndProcedure
 	
 	DataSection ;- Embedded data
@@ -59,8 +98,8 @@ Module Resources : UseModule G
 	EndDataSection
 EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 7
-; Folding = -
+; CursorPosition = 6
+; Folding = --
 ; Optimizer
 ; EnableXP
 ; DPIAware

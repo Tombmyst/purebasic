@@ -11,6 +11,8 @@
 ; Use the CompilerRead_NoDebug() macro to read stuff that should not be in the
 ; debugged output (for example function list, structure list etc)
 ;
+UseModule G
+
 CompilerIf #PB_Compiler_Debugger = 0
   Macro CompilerRead(Mode = #PB_Ascii)
     ReadProgramString(CompilerProgram, Mode)
@@ -59,7 +61,7 @@ EndProcedure
 Global Compiler_SubSystem$ = ""
 Global CompilerStartup
 
-CompilerIf #SpiderBasic
+CompilerIf #SPIDER_BASIC
   Global NewList OpenedWebServers()
 CompilerEndIf
 
@@ -69,7 +71,7 @@ CompilerIf #CompileWindows
   #COMPILER_SUBSYSTEM  = " /SUBSYSTEM "
   #COMPILER_LANGUAGE   = " /LANGUAGE "
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     #COMPILER_EXECUTABLE = "Compilers\sbcompiler.exe"
     #COMPILER_UNICODE    = "" ; no special unicode mode for spiderbasic
   CompilerElse
@@ -77,7 +79,7 @@ CompilerIf #CompileWindows
     #COMPILER_UNICODE    = " /UNICODE" ; still needed to set in older compilers
   CompilerEndIf
 CompilerElse
-  CompilerIf #CompileMac And Not #SpiderBasic
+  CompilerIf #CompileMac And Not #SPIDER_BASIC
     #COMPILER_STANDBY    = " --standby -f -ibp" ; extra flags for osx only
   CompilerElse
     #COMPILER_STANDBY    = " --standby"
@@ -85,7 +87,7 @@ CompilerElse
   #COMPILER_VERSION    = " --version"
   #COMPILER_SUBSYSTEM  = " --subsystem "
   #COMPILER_LANGUAGE   = " --language "
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     #COMPILER_EXECUTABLE = "compilers/sbcompiler"
     #COMPILER_UNICODE    = "" ; no special unicode mode for spiderbasic
   CompilerElse
@@ -335,7 +337,7 @@ Procedure StartCompiler(*Compiler.Compiler)
     index + 1
   Wend
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     CompilerIf #CompileWindows
       
       Parameters$ + " /JDK " + #DQUOTE$ + ReplaceString(OptionJDK$, "\", "/") + #DQUOTE$
@@ -375,7 +377,7 @@ Procedure StartCompiler(*Compiler.Compiler)
   ;
   Home$ = ResolveRelativePath(GetPathPart(*Compiler\Executable$), "../") ; simple trick to get the main dir
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     SetEnvironmentVariable("SPIDERBASIC_HOME", Home$)
   CompilerElse
     SetEnvironmentVariable("PUREBASIC_HOME", Home$)
@@ -530,7 +532,7 @@ Procedure CompilerCleanup()
     DeleteFile(TempPath$ + "PB_Resources.rc")
   CompilerEndIf
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     ; Be sure to kill all started servers
     ForEach OpenedWebServers()
       KillProgram(OpenedWebServers())
@@ -1321,7 +1323,7 @@ Procedure Compiler_HandleCompilerResponse(*Target.CompileTarget)
       EndIf
     ForEver
     
-    CompilerIf #SpiderBasic
+    CompilerIf #SPIDER_BASIC
       ; Don't hide the CompilerWindow if an error occurs during the cordova creation so we can look at the logs
       ;
       If CommandlineBuild = 0 And ErrorLine <> -1
@@ -1515,7 +1517,7 @@ Procedure Compiler_HandleCompilerResponse(*Target.CompileTarget)
 EndProcedure
 
 Procedure.s Compiler_BuildCommandFlags(*Target.CompileTarget, CheckSyntax, CreateExe)
-  If *CurrentCompiler\VersionNumber >= 430 Or #SpiderBasic
+  If *CurrentCompiler\VersionNumber >= 430 Or #SPIDER_BASIC
     Command$ = "COMPILE"+Chr(9)+"PROGRESS"+Chr(9)+"WARNINGS" ; use the progress and warnings flag always
   Else
     Command$ = "COMPILE"+Chr(9)+"PROGRESS"  ; no warning support on older compilers
@@ -1525,7 +1527,7 @@ Procedure.s Compiler_BuildCommandFlags(*Target.CompileTarget, CheckSyntax, Creat
   
   If *Target\Optimizer  : Command$ + Chr(9) + "OPTIMIZER" : EndIf
 
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     
     Select *Target\AppFormat
       Case #AppFormatWeb ; Can be also when using Compile/Run
@@ -1579,7 +1581,7 @@ Procedure.s Compiler_BuildCommandFlags(*Target.CompileTarget, CheckSyntax, Creat
     EndIf
   CompilerEndIf
   
-  CompilerIf Not #SpiderBasic
+  CompilerIf Not #SPIDER_BASIC
     If (*Target\Debugger|ForceDebugger)&~ForceNoDebugger
       Command$ + Chr(9) + "DEBUGGER"
       IsDebuggerUsed = 1
@@ -1697,7 +1699,7 @@ EndProcedure
 
 ; ---------------------------------------------------------------------
 
-CompilerIf #SpiderBasic
+CompilerIf #SPIDER_BASIC
   Procedure.l GetIPByHost(Host$="")
     Result.l=0
     
@@ -1722,7 +1724,7 @@ Procedure Compiler_Run(*Target.CompileTarget, IsFirstRun)
     Shared DetectedGUITerminal$, GUITerminalParameters$ ; for the debugger (shared from LinuxMisc.pb)
   CompilerEndIf
   
-  CompilerIf #CompileMac And Not #SpiderBasic
+  CompilerIf #CompileMac And Not #SPIDER_BASIC
     If *Target\ExecutableFormat = 1 ; Console
       Executable$ = *Target\RunExecutable$
     Else
@@ -1790,7 +1792,7 @@ Procedure Compiler_Run(*Target.CompileTarget, IsFirstRun)
   Debug "Directory  = " + Directory$
   Debug "----"
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     Static NewMap WebLaunchedServers.s()
     Static WebServerPortIndex = 0
     
@@ -2091,7 +2093,7 @@ Procedure.s Compiler_TemporaryFilename(*Target.CompileTarget)
     BasePath$ = TempPath$
   EndIf
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     For i = 0 To 10000
       If FileSize(BasePath$+"SpiderBasic_Compilation"+Str(i)+".html") = -1
         TargetFileName$ = BasePath$+"SpiderBasic_Compilation"+Str(i)+".html"
@@ -2149,7 +2151,7 @@ Procedure Compiler_CompileRun(SourceFileName$, *Source.SourceFile, CheckSyntax)
   ; This is for non-project only, so this is ok
   ;
   If *ActiveSource\RunExecutable$
-    CompilerIf #SpiderBasic
+    CompilerIf #SPIDER_BASIC
       DeleteFile(*ActiveSource\RunExecutable$) ; An html file on all plateforms
     CompilerElse
       CompilerIf #CompileMac
@@ -2201,7 +2203,7 @@ Procedure Compiler_CompileRun(SourceFileName$, *Source.SourceFile, CheckSyntax)
     EndIf
   CompilerEndIf
   
-  CompilerIf Not #SpiderBasic
+  CompilerIf Not #SPIDER_BASIC
     CompilerIf #CompileWindows | #CompileMac
       If *Source\UseIcon
         CompilerWrite("ICON"+Chr(9)+ResolveRelativePath(GetPathPart(*Source\FileName$), *Source\IconName$))
@@ -2209,7 +2211,7 @@ Procedure Compiler_CompileRun(SourceFileName$, *Source.SourceFile, CheckSyntax)
     CompilerEndIf
   CompilerEndIf
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     *Source\AppFormat = #AppFormatWeb ; Reset the app format to Web to avoid app creation if we use compile/run after creating an app
     
     CompilerWriteStringValue("APPNAME", *Source\WebAppName$)
@@ -2289,7 +2291,7 @@ Procedure Compiler_BuildTarget(SourceFileName$, TargetFileName$, *Target.Compile
     ProcedureReturn #False
   EndIf
   
-  CompilerIf #SpiderBasic
+  CompilerIf #SPIDER_BASIC
     If CreateExe
       Select *Target\AppFormat
           
@@ -2414,7 +2416,7 @@ Procedure Compiler_BuildTarget(SourceFileName$, TargetFileName$, *Target.Compile
     EndIf
   CompilerEndIf
   
-  CompilerIf Not #SpiderBasic
+  CompilerIf Not #SPIDER_BASIC
     CompilerIf #CompileWindows | #CompileMac
       If *Target\UseIcon
         CompilerWrite("ICON"+Chr(9)+ResolveRelativePath(BasePath$, *Target\IconName$))
@@ -2426,7 +2428,7 @@ Procedure Compiler_BuildTarget(SourceFileName$, TargetFileName$, *Target.Compile
   
   Command$ = Compiler_BuildCommandFlags(*Target, CheckSyntax, CreateExe)
   
-  CompilerIf Not #SpiderBasic
+  CompilerIf Not #SPIDER_BASIC
     If CreateExe Or *Target\ExecutableFormat = 2
       Command$ = RemoveString(Command$, Chr(9)+"DEBUGGER") ; ensure the debug flag is not set
     EndIf
@@ -2465,3 +2467,11 @@ Procedure Compiler_BuildTarget(SourceFileName$, TargetFileName$, *Target.Compile
     ProcedureReturn #False
   EndIf
 EndProcedure
+
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 2430
+; FirstLine = 2352
+; Folding = ---------------
+; Optimizer
+; EnableXP
+; DPIAware

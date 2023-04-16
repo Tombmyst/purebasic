@@ -22,6 +22,7 @@ DeclareModule G
 	Macro false : 0 : EndMacro
 	Macro true : 1 : EndMacro
 	Macro null : 0 : EndMacro
+	Macro boolean : b : EndMacro
 	
 	;- Constants
 	CompilerIf Defined(DEMO, #PB_Constant) = false
@@ -373,7 +374,7 @@ EndDeclareModule
 
 Module G : EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 17
+; CursorPosition = 24
 ; Folding = ---
 ; Optimizer
 ; EnableXP
