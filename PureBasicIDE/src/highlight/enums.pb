@@ -50,14 +50,13 @@ DeclareModule HighlightEnumColorIndices
 		#COLOR_Module
 		#COLOR_SelectionRepeat
 		#COLOR_PlainBackground
-		
-		#COLOR_Last = #COLOR_PlainBackground
 	EndEnumeration
+	#COLOR_Last = #COLOR_PlainBackground
 EndDeclareModule
 
 Module HighlightEnumColorIndices : EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 14
+; CursorPosition = 53
 ; Folding = -
 ; Optimizer
 ; EnableXP

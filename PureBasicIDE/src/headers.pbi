@@ -6,27 +6,113 @@
 XIncludeFile "global.pb"
 
 CompilerIf #PB_Compiler_OS = #PB_OS_Windows
+	XIncludeFile "empire\empire.pb"
+	XIncludeFile "__unsorted__.pb"
+	
 	;- Windows ENUMS
+	XIncludeFile "pb_analyzer\token_types.pb"
 	XIncludeFile "fs\enums.pb"
 	XIncludeFile "highlight\enums.pb"
 	XIncludeFile "history\enums.pb"
-	XIncludeFile "images\enums.pb"
-	XIncludeFile "ui\enums.pb"
+	XIncludeFile "ide\ide_constants.pb"
+	XIncludeFile "ide\autocomplete\autocomplete_items.pb"
+	XIncludeFile "ide\source\source_types.pb"
+	XIncludeFile "ide\theme\theme_constants.pb"
+	XIncludeFile "ide\tools\enums.pb"
 	XIncludeFile "xml\enums.pb"
 	
+	; -> should be after most of the constants imports because it uses other constants defined elsewhere
+	XIncludeFile "images\enums.pb"
+	XIncludeFile "ui\enums.pb"
+	
+	XIncludeFile "fs\zip.pb"
+		
+	XIncludeFile "ide\resources.pb"
+	XIncludeFile "ide\settings.pb"
+	
+	XIncludeFile "ide\scintilla_impl\ide_sci_constants.pb"
+	
+	XIncludeFile "pb_analyzer\token.pb"
+	XIncludeFile "pb_analyzer\parser.pb"
+	XIncludeFile "pb_analyzer\procedure_info.pb"
+	
+	XIncludeFile "ide\colors.pb"
+	
+	XIncludeFile "ide\selection.pb"
 	XIncludeFile "ide\timers.pb"
 	XIncludeFile "ide\regexes.pb"
+	XIncludeFile "ide\tools\tools.pb"
+	
+	XIncludeFile "pb_compiler\compiler_constants.pb"
+	XIncludeFile "pb_compiler\compiler_structs.pb"
+	XIncludeFile "pb_compiler\compiler_util.pb"
+	XIncludeFile "pb_compiler\build.pb"
+	
+	XIncludeFile "ide\source\source.pb"
+	XIncludeFile "ide\source\project.pb"
+	
+	;- IDE BUNDLED TOOLS
+	XIncludeFile "ide\updater\updater.pb"
+	XIncludeFile "ide\issues_viewer.pb"
+	XIncludeFile "ide\diff.pb"
+	
+	XIncludeFile "ui\toolbar.pb"
+	
+	XIncludeFile "api\tool_api.pb"
 CompilerElse
+	XIncludeFile "empire/empire.pb"
+	XIncludeFile "__unsorted__.pb"
+	
 	;- ENUMS
+	XIncludeFile "pb_analyzer/token_types.pb"
 	XIncludeFile "fs/enums.pb"
 	XIncludeFile "highlight/enums.pb"
 	XIncludeFile "history/enums.pb"
-	XIncludeFile "images/enums.pb"
-	XIncludeFile "ui/enums.pb"
+	XIncludeFile "ide/ide_constants.pb"
+	XIncludeFile "ide/autocomplete/autocomplete_items.pb"
+	XIncludeFile "ide/source/source_types.pb"
+	XIncludeFile "ide/theme/theme_constants.pb"
+	XIncludeFile "ide/tools/enums.pb"
 	XIncludeFile "xml/enums.pb"
 	
+	; -> should be after most of the constants imports because it uses other constants defined elsewhere
+	XIncludeFile "images/enums.pb"
+	XIncludeFile "ui/enums.pb"
+	
+	XIncludeFile "fs/zip.pb"
+	
+	XIncludeFile "ide/resources.pb"
+	XIncludeFile "ide/settings.pb"
+	
+	XIncludeFile "ide/scintilla_impl/ide_sci_constants.pb"
+	
+	XIncludeFile "pb_analyzer/procedure_info.pb"
+	XIncludeFile "pb_analyzer/token.pb"
+	XIncludeFile "pb_analyzer/parser.pb"
+	
+	XIncludeFile "ide/colors.pb"
+	
+	XIncludeFile "ide/selection.pb"
 	XIncludeFile "ide/timers.pb"
 	XIncludeFile "ide/regexes.pb"
+	XIncludeFile "ide/tools/tools.pb"
+	
+	XIncludeFile "pb_compiler/compiler_constants.pb"
+	XIncludeFile "pb_compiler/compiler_structs.pb"
+	XIncludeFile "pb_compiler/compiler_util.pb"
+	XIncludeFile "pb_compiler/build.pb"
+	
+	XIncludeFile "ide/source/source.pb"
+	XIncludeFile "ide/source/project.pb"
+	
+	;- IDE BUNDLED TOOLS
+	XIncludeFile "ide/updater/updater.pb"
+	XIncludeFile "ide/issues_viewer.pb"
+	XIncludeFile "ide/diff.pb"
+	
+	XIncludeFile "ui/toolbar.pb"
+	
+	XIncludeFile "api/tool_api.pb"
 CompilerEndIf
 
 CompilerIf #PB_Compiler_OS = #PB_OS_Windows
@@ -173,7 +259,8 @@ CompilerIf #SpiderBasic
   XIncludeFile ".." + #Separator + "Build/CreateApp.pb"
 CompilerEndIf
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 27
+; CursorPosition = 110
+; FirstLine = 42
 ; Folding = -
 ; Optimizer
 ; EnableXP

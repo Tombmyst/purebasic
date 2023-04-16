@@ -1,4 +1,5 @@
-﻿DeclareModule UIEnumWindows
+﻿
+DeclareModule UIEnumWindows : UseModule G
 	Runtime Enumeration 1 ; 0 is reserved
 		#Startup
 		#Main
@@ -10,7 +11,7 @@
 		#StructureViewer
 		#Compiler
 		#Option
-		CompilerIf #SpiderBasic
+		CompilerIf #SPIDER_BASIC
 			#CreateApp
 		CompilerEndIf
 		#Grep
@@ -43,7 +44,7 @@ EndDeclareModule
 
 Module UIEnumWindows : EndModule
 
-DeclareModule UIEnumGadgets
+DeclareModule UIEnumGadgets : UseModule G
 	Runtime Enumeration 1 ; 0 is reserved for uninitialized #PB_Any
 		#FilesPanel; now a custom drawn CanvasGadget
 		#ToolsPanel
@@ -153,9 +154,11 @@ DeclareModule UIEnumGadgets
 		#Preferences_AutoHidePanel
 		#Preferences_NoSplashScreen
 		#Preferences_DisplayFullPath
-		CompilerIf #CompileMac
+		
+		CompilerIf #PB_Compiler_OS = #PB_OS_MacOS
 			#Preferences_DisplayDarkMode
 		CompilerEndIf
+		
 		#Preferences_EnableMenuIcons
 		#Preferences_DebuggerMode
 		#Preferences_AutoClearLog
@@ -330,13 +333,13 @@ DeclareModule UIEnumGadgets
 		#Preferences_ToolbarDefault
 		#Preferences_ToolbarList
 		#Preferences_FirstColor
-		#Preferences_LastColor       = #Preferences_FirstColor + #COLOR_Last
+		#Preferences_LastColor       = #Preferences_FirstColor + HighlightEnumColorIndices::#COLOR_Last
 		#Preferences_FirstSelectColor
-		#Preferences_LastSelectColor = #Preferences_FirstSelectColor + #COLOR_Last
+		#Preferences_LastSelectColor = #Preferences_FirstSelectColor + HighlightEnumColorIndices::#COLOR_Last
 		#Preferences_FirstColorText
-		#Preferences_LastColorText   = #Preferences_FirstColorText + #COLOR_Last
+		#Preferences_LastColorText   = #Preferences_FirstColorText + HighlightEnumColorIndices::#COLOR_Last
 		#Preferences_FirstColorCheck
-		#Preferences_LastColorCheck  = #Preferences_FirstColorCheck + #COLOR_Last
+		#Preferences_LastColorCheck  = #Preferences_FirstColorCheck + HighlightEnumColorIndices::#COLOR_Last
 		#Preferences_TemplatesAskDelete
 		#Preferences_FirstContainer
 		#Preferences_LastContainer   = #Preferences_FirstContainer + 24
@@ -400,7 +403,7 @@ DeclareModule UIEnumGadgets
 		#Preferences_IssueInBrowser ; last in loop
 		#Preferences_CodeFileExtensions
 		
-		CompilerIf #SpiderBasic
+		CompilerIf #SPIDER_BASIC
 			#Preferences_WebBrowser
 			#Preferences_SelectWebBrowser
 			#Preferences_WebServerPort
@@ -487,7 +490,7 @@ DeclareModule UIEnumGadgets
 		#Option_UseCompiler  ; First to be disabled/enabled in "Main file" loop
 		#Option_SelectCompiler
 		#Option_Optimizer
-		CompilerIf #SpiderBasic
+		CompilerIf #SPIDER_BASIC
 			#Option_WindowTheme
 			#Option_SelectWindowTheme
 			#Option_GadgetTheme
@@ -764,7 +767,7 @@ DeclareModule UIEnumGadgets
 		; Help viewer for Linux and OSX
 		#Help_Panel
 		#Help_Tree
-		#HELP_INDEX
+		#HELP_INDEX_
 		#Help_IndexText
 		#Help_SearchValue
 		#Help_SearchGo
@@ -782,7 +785,7 @@ DeclareModule UIEnumGadgets
 		#Help_Editor
 		#Help_Parent
 		
-		CompilerIf #SpiderBasic
+		CompilerIf #SPIDER_BASIC
 			#WebApp_Name
 			#WebApp_Icon
 			#WebApp_SelectIcon
@@ -848,7 +851,7 @@ EndDeclareModule
 
 Module UIEnumGadgets : EndModule
 
-DeclareModule UIEnumMenus
+DeclareModule UIEnumMenus : UseModule G
 	Enumeration 0
 		#New     ; first item that can have a shortcut assigned in the preferences. Must have value 0!!
 		#Open
@@ -866,7 +869,7 @@ DeclareModule UIEnumMenus
 		#NewlineMacOS
 		;#MENU_SortSources
 		
-		CompilerIf #CompileMac
+		CompilerIf #PB_Compiler_OS = #PB_OS_MacOS
 			#PreferenceNotUsed
 			#EditHistory
 			#ExitNotUsed
@@ -911,7 +914,7 @@ DeclareModule UIEnumMenus
 		; Form menu constants
 		#NewForm
 		#FormSwitch
-		#DUPLICATE
+		#DUPLICATE_
 		#FormImageManager
 		
 		#CompileRun
@@ -967,7 +970,7 @@ DeclareModule UIEnumMenus
 		#Help
 		#UpdateCheck
 		
-		CompilerIf #CompileMac
+		CompilerIf #PB_Compiler_OS = #PB_OS_MacOS
 			#AboutNotUsed
 		CompilerElse
 			#About
@@ -1051,24 +1054,24 @@ DeclareModule UIEnumMenus
 		#Diff_ShowFiles ; shortcut only
 		
 		#RecentFiles_Start
-		#RecentFiles_End    = #RecentFiles_Start + (#MAX_RecentFiles * 2)
+		#RecentFiles_End    = #RecentFiles_Start + (IDEConstants::#MAX_RECENT_ITEMS * 2)
 		
 		#AddTools_Start
-		#AddTools_End       = #AddTools_Start + #MAX_AddTools
+		#AddTools_End       = #AddTools_Start + IDEConstants::#MAX_TOOLS
 		
 		#AddHelpFiles_Start
-		#AddHelpFiles_End   = #AddHelpFiles_Start + #MAX_AddHelp
+		#AddHelpFiles_End   = #AddHelpFiles_Start + IDEConstants::#MAX_USER_LIBRARIES_HELP_FILES
 		
 		#DefaultTarget_Start
-		#DefaultTarget_End    = #DefaultTarget_Start + #MAX_MenuTargets
+		#DefaultTarget_End    = #DefaultTarget_Start + IDEConstants::#MAX_MENU_PROJECT_TARGETS
 		
 		#BuildTarget_Start
-		#BuildTarget_End    = #BuildTarget_Start + #MAX_MenuTargets
+		#BuildTarget_End    = #BuildTarget_Start + IDEConstants::#MAX_MENU_PROJECT_TARGETS
 		
 		
 		#Help_Enter
 		
-		CompilerIf #CompileWindows | #CompileMac; to handle autocomplete in scintilla
+		CompilerIf #PB_Compiler_OS = #PB_OS_Windows Or #PB_Compiler_OS = #PB_OS_MacOS ; to handle autocomplete in scintilla
 			#Scintilla_Enter
 			#Scintilla_Tab
 			#Scintilla_ShiftTab
@@ -1147,7 +1150,7 @@ DeclareModule UIEnumFonts
 			#ToolsPanelFake
 		CompilerEndIf
 		
-		CompilerIf #CompileLinux
+		CompilerIf #PB_Compiler_OS = #PB_OS_Linux
 			#Help_Text
 			#Help_Title
 			#Help_Bold
@@ -1157,10 +1160,24 @@ DeclareModule UIEnumFonts
 EndDeclareModule
 
 Module UIEnumFonts : EndModule
+
+DeclareModule UIEnumDragDrop
+	Enumeration
+		;#DRAG_Profiler = 0  - reserved for debugger
+		#DRAG_SortSources = 1
+		#DRAG_Preferences_Toolbar
+		#DRAG_Preferences_ToolsFromAvailable
+		#DRAG_Preferences_ToolsFromUsed
+		#DRAG_AddTools
+		#DRAG_Templates
+	EndEnumeration
+EndDeclareModule
+
+Module UIEnumDragDrop : EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 1100
-; FirstLine = 1080
-; Folding = ----
+; CursorPosition = 1152
+; FirstLine = 1097
+; Folding = -----
 ; Optimizer
 ; EnableXP
 ; DPIAware

@@ -12,7 +12,7 @@
 		#FileViewer_Right
 		
 		#Preferences_FirstColor
-		#Preferences_LastColor = #Preferences_FirstColor + #COLOR_Last
+		#Preferences_LastColor = #Preferences_FirstColor + HighlightEnumColorIndices::#COLOR_Last
 		
 		#Preferences_ToolsPanelFrontColor
 		#Preferences_ToolsPanelBackColor
@@ -22,7 +22,7 @@
 		#FilePanel_New
 		#FilePanel_Project
 		
-		CompilerIf #CompileLinux
+		CompilerIf #PB_Compiler_OS = #PB_OS_Linux
 			#LinuxWindowIcon
 		CompilerEndIf
 		
@@ -211,10 +211,10 @@
 		#History_Session
 		#History_File
 		#History_First
-		#History_Last = #History_First + #HISTORY_Last
+		#History_Last = #History_First + HistoryEnumEvents::#LAST  ; TODO: checker pour réutiliser les mêmes images pour les historiques?
 		
 		#FirstThemePreview ; for loading individual icons. the composed preview images are #PB_Any
-		#LastThemePreview  = #FirstThemePreview + #MAX_ThemePreview
+		#LastThemePreview  = #FirstThemePreview + ThemeConstants::#MAX_SHOWN_THEME_PREVIEWS_IN_SETTINGS
 		
 	EndEnumeration
 EndDeclareModule
@@ -222,6 +222,7 @@ EndDeclareModule
 Module ImageEnumHandles : EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
 ; CursorPosition = 216
+; FirstLine = 143
 ; Folding = -
 ; Optimizer
 ; EnableXP

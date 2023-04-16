@@ -8,7 +8,7 @@
 		#Reload
 		#Edit
 		
-		#Last = #Edit ; highest event num
+		#LAST = #Edit ; highest event num
 	EndEnumeration
 EndDeclareModule
 
@@ -24,7 +24,7 @@ EndDeclareModule
 Module HistoryEnumDBs : EndModule
 
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 17
+; CursorPosition = 10
 ; Folding = -
 ; Optimizer
 ; EnableXP

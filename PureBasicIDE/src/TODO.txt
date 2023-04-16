@@ -1,1 +1,19 @@
-﻿- rendu à Common.pb line 1540
+﻿IN Commons line 2171
+
+[EVENTUAL BLOCKER] PURIFIER GRANULARITY:
+	Créer un enum pour les granularités car désormais on va storer les paramètres en U8 plutot que STRING
+
+[MVP] Création nouveaux fichiers: Prompter le type de fichier (défaut PB) + ajout au projet automatique quand en mode projet
+[MVP] Amélioration majeure de l'autocomplete
+[MVP] Reach token definition by control + click
+[MVP] Refactor:rename a token and automatically rename that specific token across sources
+[MVP] Add actions: move line up, move line down, move caret/selection to prev/next word
+[MVP] Documentation
+[MVP] Uniformiser la gestion des lignes (line number): TOUT DOIT COMMENCER À 1 (1-based, comme dans le UI)
+
+[CHECK] Ca sert tu a de quoi de garder en RAM (structure) les MD5?
+
+[NTH] Dark Mode selon l'heure
+[NTH] Background image
+[NTH] Custom UI
+[NTH] Integrate MAKE for more complex compilations

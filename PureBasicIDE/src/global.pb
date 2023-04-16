@@ -30,15 +30,19 @@ DeclareModule G
 	CompilerEndIf
 	
 	CompilerIf Defined(Debug, #PB_Constant) = false
-		#DEBUG = 0
+		#DEBUG = false
+	CompilerElse
+		#DEBUG = true
 	CompilerEndIf
 	
 	CompilerIf Not Defined(SpiderBasic, #PB_Constant)
-		#SpiderBasic = 0
+		#SPIDER_BASIC = false
+	CompilerElse
+		#SPIDER_BASIC = true
 	CompilerEndIf
 	
 	;- Product info
-	CompilerIf #SpiderBasic
+	CompilerIf #SPIDER_BASIC
 		#ProductName$ = "SpiderBasic"
 		#ProductWebSite$ = "https://www.spiderbasic.com"
 		#ProjectFileNamespace$ = "http://www.purebasic.com/namespace" ; SBP uses PBP namespace
@@ -87,7 +91,7 @@ DeclareModule G
 	#MAX_EpressionHistory   = 30   ; size of the history in the DebugOutput
 	#MAX_ThemePreview       = 17   ; Number of icons displayed in theme preview (allocated static image numbers)
 	#MAX_ConfigLines        = 300  ; Max lines of config stuff an the source end (allocates global array)
-	#MAX_ResourceFiles      = 20   ; Max number of resource files (allocated in CompileTarget structure)
+	#MAX_ResourceFiles      = 20   ; Max number of resource files (allocated in CompileTarget structure) DEPRECATED: use CompilerConstants::#MAX_RESOURCE_FILES
 	#MAX_MenuTargets        = 100  ; Max number of project targets that can be shown in the menu (reserves menu entries)
 	
 	;- Processor specific switches (for lazy people :-))
@@ -322,7 +326,7 @@ DeclareModule G
 			
 	CompilerEndSelect
 	
-	CompilerIf #SpiderBasic
+	CompilerIf #SPIDER_BASIC
 		
 		CompilerIf #CompileWindows
 			#PreferenceFileName$ = "SpiderBasic.prefs"
@@ -346,12 +350,28 @@ DeclareModule G
 	CompilerElse
 		#CharSize = 1
 	CompilerEndIf
+	
+	Structure STRUCT_PTR  ; REPLACES Commons::PTR
+		StructureUnion
+			unsigned_byte.a[0]
+			byte_.b[0] ; even when declaring with an array like this, we still
+			char_.c[0] ; can use the single \b, which is perfect for a universal
+			word_.w[0] ; pointer variable
+			unsigned_word.u[0]
+			long_.l[0]
+			float_.f[0]
+			quad_.q[0]
+			double_.d[0]
+			integer_.i[0]
+			*pointer.PTR[0]
+		EndStructureUnion
+	EndStructure
 EndDeclareModule
 
 Module G : EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 55
-; FirstLine = 27
+; CursorPosition = 328
+; FirstLine = 292
 ; Folding = ---
 ; Optimizer
 ; EnableXP

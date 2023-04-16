@@ -7,9 +7,25 @@
   <section name="data">
     <explorer view="" pattern="0"/>
     <log show="1"/>
-    <lastopen date="2023-04-15 00:11" user="tombmyst" host="DESKTOP-CM0B76I"/>
+    <lastopen date="2023-04-15 09:20" user="tombmyst" host="DESKTOP-CM0B76I"/>
   </section>
   <section name="files">
+    <file name="src\headers.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="1" panelstate="++"/>
+      <fingerprint md5="e8b5446d08f7bf82707cf0c52c87bbf4"/>
+    </file>
+    <file name="src\global.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="2" panelstate="++"/>
+      <fingerprint md5="976fb1f3aed33d8c5d670828494e157a"/>
+    </file>
+    <file name="src\ide\regexes.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="3" panelstate="+++"/>
+      <fingerprint md5="b38cd76933b7dcbc85c3939bf5bc2fd3"/>
+    </file>
+    <file name="src\TODO.txt">
+      <config load="0" scan="0" panel="1" warn="1" lastopen="1" sortindex="4" panelstate="++"/>
+      <fingerprint md5="246ba5bacec1aca3e84b98d13c5f50ee"/>
+    </file>
     <file name="..\DialogManager\DialogManager.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="++"/>
       <fingerprint md5="2f37b506b1faddc2a4c0936351f8c9a3"/>
@@ -340,14 +356,6 @@
     <file name="ZipManagement.pb">
       <config load="0" scan="1" panel="1" warn="0" lastopen="0" sortindex="999" panelstate="+"/>
     </file>
-    <file name="src\headers.pbi">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="1" panelstate="++"/>
-      <fingerprint md5="d7e1ffb219eb91d26f8f1fcb40c0f5d9"/>
-    </file>
-    <file name="src\global.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="2" panelstate="++"/>
-      <fingerprint md5="976fb1f3aed33d8c5d670828494e157a"/>
-    </file>
     <file name="src\highlight\enums.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="10cb7d0b9c4ffc0632f0ef0d2e7af9a6"/>
@@ -372,17 +380,9 @@
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="235f44353e2a8c583190510f9da9127d"/>
     </file>
-    <file name="src\ide\regexes.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="3" panelstate="+++"/>
-      <fingerprint md5="b38cd76933b7dcbc85c3939bf5bc2fd3"/>
-    </file>
     <file name="src\ide\timers.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="b562150ead6e3fe312ee4fa3dfcf460b"/>
-    </file>
-    <file name="src\TODO.txt">
-      <config load="0" scan="0" panel="1" warn="1" lastopen="1" sortindex="4" panelstate="++"/>
-      <fingerprint md5="246ba5bacec1aca3e84b98d13c5f50ee"/>
     </file>
   </section>
   <section name="targets">

@@ -29,8 +29,9 @@
 	EndEnumeration
 EndDeclareModule
 
-Module FSEnumsFileHandles : EndModule
+Module FSEnumFileHandles : EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 28
 ; Folding = -
 ; Optimizer
 ; EnableXP
