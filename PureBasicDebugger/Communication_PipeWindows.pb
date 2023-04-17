@@ -401,7 +401,7 @@ CompilerIf #CompileWindows
       
       ; Cache the Win9x check to not execute it on every run
       ;
-      CompilerIf #CompileX86
+      CompilerIf Not #__64BITS__
         Static IsWin9x = -1
         If IsWin9x = -1
           If OSVersion() = #PB_OS_Windows_95 Or OSVersion() = #PB_OS_Windows_98 Or OSVersion() = #PB_OS_Windows_ME
@@ -504,3 +504,11 @@ CompilerIf #CompileWindows
   
 CompilerEndIf
 
+
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 403
+; FirstLine = 372
+; Folding = ----
+; Optimizer
+; EnableXP
+; DPIAware

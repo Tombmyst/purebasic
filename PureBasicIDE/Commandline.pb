@@ -359,6 +359,10 @@ Procedure ParseCommandline()
         CommandlineVersion()
         End
         
+    Case "--console"
+    	OpenConsole()
+    	Logger::useConsole()
+        
       Case "-p"
         ParameterIndex + 1
         PreferencesFile$ = ResolveRelativePath(CurrentDirectory$, ProgramParameter(ParameterIndex))
@@ -469,8 +473,8 @@ EndProcedure
 
 
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 394
-; FirstLine = 391
+; CursorPosition = 363
+; FirstLine = 315
 ; Folding = --
 ; Optimizer
 ; EnableXP

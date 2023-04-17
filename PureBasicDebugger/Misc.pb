@@ -13,7 +13,7 @@
 ;
 ; Handles array, list, map etc
 ;
-Procedure GetValueSize(type, *Pointer, Is64bit)
+Procedure GetValueSize(type, *Pointer, Is64bit) : UseModule G
   If IS_POINTER(type) Or IS_INTEGER(type)
     If Is64bit
       ProcedureReturn 8
@@ -33,7 +33,7 @@ Procedure GetValueSize(type, *Pointer, Is64bit)
         
         ; strings are stored in the format of the external debugger
       Case #TYPE_FIXEDSTRING,  #TYPE_STRING
-        ProcedureReturn MemoryStringLengthBytes(*Pointer) + #CharSize
+        ProcedureReturn MemoryStringLengthBytes(*Pointer) + #CHARSIZE
         
       Case #TYPE_ARRAY
         ; string with dimensions (ascii)
@@ -55,7 +55,7 @@ Procedure GetValueSize(type, *Pointer, Is64bit)
           Size = 4
         EndIf
         If PeekB(*Pointer + Size)  ; IsCurrent
-          ProcedureReturn Size + 1 + MemoryStringLengthBytes(*Pointer + Size + 1) + #CharSize
+          ProcedureReturn Size + 1 + MemoryStringLengthBytes(*Pointer + Size + 1) + #CHARSIZE
         Else
           ProcedureReturn Size + 1
         EndIf
@@ -345,3 +345,11 @@ EndProcedure
 
 
 
+
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 57
+; FirstLine = 10
+; Folding = --
+; Optimizer
+; EnableXP
+; DPIAware

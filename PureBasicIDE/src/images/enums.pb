@@ -23,7 +23,7 @@
 		#FilePanel_Project
 		
 		CompilerIf #PB_Compiler_OS = #PB_OS_Linux
-			#LinuxWindowIcon
+			#LINUX_WINDOW_ICON
 		CompilerEndIf
 		
 		;   #IMAGE_CPU_Real
@@ -221,8 +221,7 @@ EndDeclareModule
 
 Module ImageEnumHandles : EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 216
-; FirstLine = 143
+; CursorPosition = 27
 ; Folding = -
 ; Optimizer
 ; EnableXP

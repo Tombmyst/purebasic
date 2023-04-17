@@ -362,8 +362,10 @@ Procedure SetDebuggerMenuStates()
     DisableMenuAndToolbarItem(#MENU_ClearErrorMarks, 1)
   EndIf
   
-  CompilerIf #CompilePPC
-    DisableMenuAndToolbarItem(#MENU_DebugAsm, 1) ; TODO: ASM registers support not supported on OS X
+  CompilerIf Defined(CompilePPC, #PB_Constant)
+  	CompilerIf #CompilePPC
+  		DisableMenuAndToolbarItem(#MENU_DebugAsm, 1) ; TODO: ASM registers support not supported on OS X
+  	CompilerEndIf
   CompilerEndIf
   
   UpdateErrorLogMenuState()
@@ -1723,3 +1725,11 @@ Procedure Debugger_ProcessShortcuts(EventWindowID, EventID)
   
   ProcedureReturn result
 EndProcedure
+
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 367
+; FirstLine = 351
+; Folding = -------
+; Optimizer
+; EnableXP
+; DPIAware

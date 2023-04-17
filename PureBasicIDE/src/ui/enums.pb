@@ -1128,7 +1128,7 @@ DeclareModule UIEnumMenus : UseModule G
 	EndEnumeration
 	
 	
-	CompilerIf #CompileMac
+	CompilerIf #__MAC__
 		; Warning, these are negative values
 		#Preference = #PB_Menu_Preferences
 		#Exit  = #PB_Menu_Quit
@@ -1138,7 +1138,7 @@ EndDeclareModule
 
 Module UIEnumMenus : EndModule
 
-DeclareModule UIEnumFonts
+DeclareModule UIEnumFonts : UseModule G
 	Enumeration 1 ; 0 is reserved for uninitialized #PB_Any objects
 		#Editor
 		#Editor_Bold
@@ -1146,11 +1146,11 @@ DeclareModule UIEnumFonts
 		#ToolsPanel
 		#DebugOut
 		
-		CompilerIf #CompileWindows
+		CompilerIf #__WIN__
 			#ToolsPanelFake
 		CompilerEndIf
 		
-		CompilerIf #PB_Compiler_OS = #PB_OS_Linux
+		CompilerIf #__LINUX__
 			#Help_Text
 			#Help_Title
 			#Help_Bold
@@ -1176,7 +1176,7 @@ EndDeclareModule
 Module UIEnumDragDrop : EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
 ; CursorPosition = 1152
-; FirstLine = 1097
+; FirstLine = 1111
 ; Folding = -----
 ; Optimizer
 ; EnableXP

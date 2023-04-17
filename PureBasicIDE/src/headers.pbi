@@ -30,6 +30,7 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "images\enums.pb"
 	XIncludeFile "ui\enums.pb"
 	
+	XIncludeFile "fs\pbfs.pb"
 	XIncludeFile "fs\zip.pb"
 
 	XIncludeFile "ide\resources.pb"
@@ -66,6 +67,8 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "ui\statusbar.pb"
 	XIncludeFile "ui\menu.pb"
 	
+	XIncludeFile "ide\args.pb"
+	
 	;- APIs
 	XIncludeFile "api\tool_api.pb"
 	XIncludeFile "api\dialog_window_api.pb"
@@ -94,6 +97,7 @@ CompilerElse
 	XIncludeFile "images/enums.pb"
 	XIncludeFile "ui/enums.pb"
 	
+	XIncludeFile "fs/pbfs.pb"
 	XIncludeFile "fs/zip.pb"
 	
 	XIncludeFile "ide/resources.pb"
@@ -129,6 +133,8 @@ CompilerElse
 	XIncludeFile "ui/toolbar.pb"
 	XIncludeFile "ui/statusbar.pb"
 	XIncludeFile "ui/menu.pb"
+	
+	XIncludeFile "ide/args.pb"
 	
 	;- APIs
 	XIncludeFile "api/tool_api.pb"
@@ -322,8 +328,8 @@ XIncludeFile ".." + Path::#SEPARATOR + "ToolsPanel.pb"
 ; crossplatform debugging helpers
 XIncludeFile ".." + Path::#SEPARATOR + "Debugging.pb"
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 73
-; FirstLine = 12
+; CursorPosition = 99
+; FirstLine = 42
 ; Folding = -
 ; Optimizer
 ; EnableXP

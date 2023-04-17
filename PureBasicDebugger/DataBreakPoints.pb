@@ -35,8 +35,10 @@ Procedure DeleteDataBreakPoint(*Debugger.DebuggerData, *Point.DataBreakPoint)
     *Debugger\FirstDataBreakPoint = *Point\Next
   EndIf
   
-  CompilerIf #CompilePPC
-    Debug "FIXME: ClearStructure() broken on PPC"
+  CompilerIf Defined(CompilePPC, #PB_Constant)
+  	CompilerIf #CompilePPC
+  		Debug "FIXME: ClearStructure() broken on PPC"
+  	CompilerEndIf
   CompilerElse
     ClearStructure(*Point, DataBreakPoint)
   CompilerEndIf
@@ -367,3 +369,10 @@ Procedure DataBreakpoint_DebuggerEvent(*Debugger.DebuggerData)
   EndSelect
   
 EndProcedure
+; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 40
+; FirstLine = 12
+; Folding = ---
+; Optimizer
+; EnableXP
+; DPIAware

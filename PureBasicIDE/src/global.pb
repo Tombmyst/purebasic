@@ -16,13 +16,35 @@ EndMacro
 
 UseMD5Fingerprint()
 UseCRC32Fingerprint()
-
+UsePNGImageDecoder()
 
 DeclareModule G
 	Macro false : 0 : EndMacro
 	Macro true : 1 : EndMacro
 	Macro null : 0 : EndMacro
 	Macro boolean : b : EndMacro
+		
+	Macro __LOG__ : #PB_Compiler_File, #PB_Compiler_Module, #PB_Compiler_Procedure, #PB_Compiler_Line : EndMacro
+		
+; 	Macro __IS_TESTING__
+; 		Defined(__TEST__, #PB_Constant)
+; 	EndMacro
+	
+	CompilerIf #PB_Compiler_OS = #PB_OS_Windows
+		IncludeFile "empire\snippets\os_macros.pbi"
+	CompilerElse
+		IncludeFile "empire/snippets/os_macros.pbi"
+	CompilerEndIf
+	
+	CompilerIf #PB_Compiler_Unicode
+		#CHARSIZE = 2
+	CompilerElse
+		#CHARSIZE = 1
+	CompilerEndIf
+	
+	Macro DQ
+		"
+	EndMacro
 	
 	;- Constants
 	CompilerIf Defined(DEMO, #PB_Constant) = false
@@ -97,59 +119,16 @@ DeclareModule G
 	#MAX_ConfigLines        = 300  ; Max lines of config stuff an the source end (allocates global array)
 	#MAX_ResourceFiles      = 20   ; Max number of resource files (allocated in CompileTarget structure) DEPRECATED: use CompilerConstants::#MAX_RESOURCE_FILES
 	#MAX_MenuTargets        = 100  ; Max number of project targets that can be shown in the menu (reserves menu entries)
-	
-	;- Processor specific switches (for lazy people :-))
-	;
-	CompilerSelect #PB_Compiler_Processor
-		CompilerCase #PB_Processor_x86
-			#CompileX86   = true
-			#CompileX64   = false
-			#CompilePPC   = false
-			#CompileArm64 = false
-			#CompileArm32 = false
-			
-		CompilerCase #PB_Processor_x64
-			#CompileX86   = false
-			#CompileX64   = true
-			#CompilePPC   = false
-			#CompileArm64 = false
-			#CompileArm32 = false
-			
-		CompilerCase #PB_Processor_PowerPC
-			#CompileX86   = false
-			#CompileX64   = false
-			#CompilePPC   = true
-			#CompileArm64 = false
-			#CompileArm32 = false
-			
-		CompilerCase #PB_Processor_Arm64
-			#CompileX86   = false
-			#CompileX64   = false
-			#CompilePPC   = false
-			#CompileArm64 = true
-			#CompileArm32 = false
-			
-		CompilerCase #PB_Processor_Arm32
-			#CompileX86   = false
-			#CompileX64   = false
-			#CompilePPC   = false
-			#CompileArm64 = false
-			#CompileArm32 = true
-			
-		CompilerDefault
-			CompilerError "Processor not supported"
-			
-	CompilerEndSelect
-	
+
 	
 	Global DefaultEditorFontName$  ; TODO: remove
 								   ; OS specific switches
 								   ;
 	CompilerSelect #PB_Compiler_OS
 		CompilerCase #PB_OS_Windows ;- Windows specific switch
-			#CompileWindows   = true	; this is for the lazy guys :)
-			#CompileLinux     = false
-			#CompileMac       = false
+; 			#CompileWindows   = true	; this is for the lazy guys :)
+; 			#CompileLinux     = false
+; 			#CompileMac       = false
 			#CompileMacCocoa  = false
 			#CompileMacCarbon = false
 			#CompileLinuxGtk1 = false  ; to directly check for linux + gtk version, which is often needed
@@ -211,9 +190,9 @@ DeclareModule G
 			#PB_MessageRequester_ResultOk = 1
 			
 		CompilerCase #PB_OS_Linux ;- Linux
-			#CompileWindows   = false
-			#CompileLinux     = true
-			#CompileMac       = false
+; 			#CompileWindows   = false
+; 			#CompileLinux     = true
+; 			#CompileMac       = false
 			#CompileMacCocoa  = false
 			#CompileMacCarbon = false
 			
@@ -266,12 +245,12 @@ DeclareModule G
 			#PB_MessageRequester_ResultOk = 6
 			
 		CompilerCase #PB_OS_MacOS ;- MacOS
-			#CompileWindows   = false
-			#CompileLinux     = false
+; 			#CompileWindows   = false
+; 			#CompileLinux     = false
 			#CompileLinuxGtk1 = false  ; to directly check for linux + gtk version, which is often needed
 			#CompileLinuxGtk2 = false
 			
-			#CompileMac       = true
+; 			#CompileMac       = true
 			
 			CompilerIf Subsystem("carbon")
 				#CompileMacCocoa  = false
@@ -332,7 +311,7 @@ DeclareModule G
 	
 	CompilerIf #SPIDER_BASIC
 		
-		CompilerIf #CompileWindows
+		CompilerIf #__WIN__
 			#PreferenceFileName$ = "SpiderBasic.prefs"
 		CompilerElse
 			#PreferenceFileName$ = "spiderbasic.prefs"
@@ -340,21 +319,14 @@ DeclareModule G
 		
 	CompilerElse
 		
-		CompilerIf #CompileWindows
+		CompilerIf #__WIN__
 			#PreferenceFileName$ = "PureBasic.prefs"
 		CompilerElse
 			#PreferenceFileName$ = "purebasic.prefs"
 		CompilerEndIf
 		
 	CompilerEndIf
-	
-	
-	CompilerIf #PB_Compiler_Unicode  ; TODO: isn't it defined somewhere? (charsize)
-		#CharSize = 2
-	CompilerElse
-		#CharSize = 1
-	CompilerEndIf
-	
+
 	Structure STRUCT_PTR  ; REPLACES Commons::PTR
 		StructureUnion
 			unsigned_byte.a[0]
@@ -374,8 +346,8 @@ EndDeclareModule
 
 Module G : EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 24
-; Folding = ---
+; CursorPosition = 42
+; Folding = ----
 ; Optimizer
 ; EnableXP
 ; DPIAware

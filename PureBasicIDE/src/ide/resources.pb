@@ -111,12 +111,29 @@ Module Resources : UseModule G
 		Data.b true
 		Data.b false
 		Data.b false
+		
+		CompilerIf #PB_Compiler_OS = #PB_OS_Linux  ;- Linux Specific
+			linux_window_icon:
+			CompilerIf #SPIDER_BASIC
+				IncludeBinary "../data/SpiderBasic/Logo_48x48.png"	
+			CompilerElse
+				IncludeBinary "../data/data/logo/PBLogoLinux.png"
+			CompilerEndIf
+		CompilerEndIf
 	EndDataSection
+	
+	CompilerIf #PB_Compiler_OS = #PB_OS_Linux
+		If CatchImage(ImageEnumHandles::#LINUX_WINDOW_ICON, ?linux_window_icon)
+			gtk_window_set_default_icon_(ImageID(ImageEnumHandles::#LINUX_WINDOW_ICON))
+		Else
+			
+		endif
+	CompilerEndIf
 EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 29
-; FirstLine = 4
-; Folding = --
+; CursorPosition = 129
+; FirstLine = 52
+; Folding = ---
 ; Optimizer
 ; EnableXP
 ; DPIAware

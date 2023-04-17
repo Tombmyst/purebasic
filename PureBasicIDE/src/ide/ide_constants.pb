@@ -5,12 +5,16 @@
 	#MAX_RECENT_ITEMS = 100  ; reserves Menu entries (for recent projects and recent files)
 	#MAX_TOOLS = 100
 	#MAX_USER_LIBRARIES_HELP_FILES = 100
+	
+	#PROGRAM_NAME = "PureBasic IDE"  ; TODO: rename
+	#PROGRAM_VERSION = "0.1"
 EndDeclareModule
 
 Module IDEConstants
 	
 EndModule
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
+; CursorPosition = 9
 ; Folding = -
 ; Optimizer
 ; EnableXP
