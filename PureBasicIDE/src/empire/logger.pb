@@ -70,12 +70,19 @@ Module Logger
 	Declare _logLevelToColor(level.b, *fore, *back)
 	Declare.s _handleFileModuleProcedureLineNumber(fileName.s, moduleName.s, procedureName.s, lineNumber.i)
 	Declare.boolean _should_log(level.b)
+	Declare.s _to_yyyy_mm_dd_hh_ii_ss(date_.l, date_separator.s = "/", datetime_separator.s = " ", time_separator.s = ":") 
+	Declare.s _join(with_.s, s1.s, s2.s, s3.s="")
 	
 	CompilerIf Defined(__LOG_LEVEL__, #PB_Constant) = false
 		#__LOG_LEVEL__ = ""
 	CompilerEndIf
 	
-	_logLevelConsole = LogLevel::to_level(StringUtil::first_not_empty(#__LOG_LEVEL__, GetEnvironmentVariable("PB_IDE_LOG_LEVEL")))
+	If (#__LOG_LEVEL__ <> "")
+		_logLevelConsole = LogLevel::to_level(#__LOG_LEVEL__)
+	Else
+		_logLevelConsole = LogLevel::to_level(GetEnvironmentVariable("PB_IDE_LOG_LEVEL"))
+	EndIf
+	
 	Debug "Setting level to: " + _logLevelConsole
 	
 	Procedure useConsole()
@@ -83,8 +90,11 @@ Module Logger
 	EndProcedure
 	
 	Procedure setLogFile(file.s, should_append.boolean = false)
-		FileSystem::safe_close_file(_logFileHandle)
-		_logFileHandle = OpenFile(#PB_Any, file, iif::ii(should_append, #PB_File_Append|#PB_File_NoBuffering, #PB_File_NoBuffering))
+		If (IsFile(_logFileHandle))
+			CloseFile(_logFileHandle)
+		EndIf
+
+		_logFileHandle = OpenFile(#PB_Any, file, (#PB_File_Append * should_append) | #PB_File_NoBuffering)
 	EndProcedure
 	
 	Procedure setLogLevel(level.b, outlet.b)
@@ -156,7 +166,7 @@ Module Logger
 	EndProcedure
 	
 	Procedure.s _produceLogString(level.b, message.s, fileName.s, moduleName.s, procedureName.s, lineNumber.i)
-		ProcedureReturn "[" + DateUtil::to_yyyy_mm_dd_hh_ii_ss(Date()) + "] [" + _logLevelToString(level) + "] " + _handleFileModuleProcedureLineNumber(fileName, moduleName, procedureName, lineNumber) + " " + message
+		ProcedureReturn "[" + _to_yyyy_mm_dd_hh_ii_ss(Date()) + "] [" + _logLevelToString(level) + "] " + _handleFileModuleProcedureLineNumber(fileName, moduleName, procedureName, lineNumber) + " " + message
 	EndProcedure
 	
 	Procedure.s _logLevelToString(level.b)
@@ -217,17 +227,44 @@ Module Logger
 			procedureName = procedureName + "()"
 		EndIf
 		
-		ProcedureReturn "[" + StringUtil::join("::", fileName, moduleName, procedureName) + ", at " + Str(lineNumber) + "]"
+		ProcedureReturn "[" + _join("::", fileName, moduleName, procedureName) + ", at " + Str(lineNumber) + "]"
 	EndProcedure
 	
 	Procedure.boolean _should_log(level.b)
 		ProcedureReturn Bool(level >= _logLevelConsole Or level >= _logLevelFile)
 	EndProcedure
+	
+	; In order to remove dependencies over other modules, the following functions were inserted
+	Procedure.s _to_yyyy_mm_dd_hh_ii_ss(date_.l, date_separator.s = "/", datetime_separator.s = " ", time_separator.s = ":")
+		ProcedureReturn FormatDate("%yyyy" + date_separator + "%mm" + date_separator + "%dd" + datetime_separator + "%hh" + time_separator + "%ii" + time_separator + "%ss", date_)
+	EndProcedure
+	
+	Procedure.s _join(with_.s, s1.s, s2.s, s3.s="")
+		Protected result.s = ""
+		
+		If (s1 <> "")
+			result = result + s1 + with_
+		EndIf
+		
+		If (s2 <> "")
+			result = result + s2 + with_
+		EndIf
+		
+		If (s3 <> "")
+			result = result + s3 + with_
+		EndIf
+		
+		If (result = "")
+			ProcedureReturn ""
+		EndIf
+		
+		ProcedureReturn Left(result, Len(result) - Len(with_))
+	EndProcedure
 EndModule
 
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 219
-; FirstLine = 163
+; CursorPosition = 96
+; FirstLine = 80
 ; Folding = -----
 ; Optimizer
 ; EnableXP
