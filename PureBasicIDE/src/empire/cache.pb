@@ -49,6 +49,15 @@ Module LRUCache : UseModule EmpireCommons
 		#_TYPE_STRING
 	EndEnumeration
 	
+	Macro store_item(key, value, type_)
+		Logger::trace("Storing " + key + " and value " + Str(value), __LOG__)
+		_refresh_lru_list_if_necessary(key)
+		_store(key, type, @value)
+		AddMapElement(_cache(), key)
+		_cache()\type = type_
+		PokeB(@_cache()\value, value)
+	EndMacro
+	
 	Declare _store(key.s, type.b, *value)
 	Declare _refresh_lru_list_if_necessary(key.s)
 	Declare _move_to_front(key.s)
@@ -59,14 +68,7 @@ Module LRUCache : UseModule EmpireCommons
 	Global NewMap _cache._STRUCT_CACHE_ITEM()
 	Global NewList _recent_used_items.s()
 	
-	Procedure store_byte(key.s, value.b)
-		Logger::trace("Storing " + key + " and value " + Str(value), __LOG__)
-		_refresh_lru_list_if_necessary(key)
-		_store(key, #_TYPE_BYTE, @value)
-		AddMapElement(_cache(), key)
-		_cache()\type = type
-		PokeB(@_cache()\value, value)
-	EndProcedure
+	Procedure store_byte(key.s, value.b) : store_item(key, value, #_TYPE_BYTE) : EndProcedure
 	
 	Procedure.b get_byte(key.s, default_.b=0)
 		If (FindMapElement(_cache(), key))
@@ -126,14 +128,15 @@ CompilerIf __IS_TESTING__
 		Define var.b = 125 
 		LRUCache::store_byte("raymond", var)
 	EndProcedure
-	Debug LRUCache::get_byte("roger")
+	
+	__test_lru_cache()
+	
 	Test::assert(Bool(LRUCache::get_byte("roger") = 123), "Stored byte")
 	Test::assert(Bool(LRUCache::get_byte("patate") = 124), "Stored byte in procedure")
 	Test::assert(Bool(LRUCache::get_byte("raymond") = 125), "Stored byte in procedure from variable")
 CompilerEndIf
 ; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 67
-; FirstLine = 54
+; CursorPosition = 37
 ; Folding = --
 ; Optimizer
 ; EnableXP

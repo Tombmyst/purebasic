@@ -7,24 +7,85 @@
   <section name="data">
     <explorer view="" pattern="0"/>
     <log show="1"/>
-    <lastopen date="2023-04-16 23:27" user="tombmyst" host="DESKTOP-CM0B76I"/>
+    <lastopen date="2023-04-18 08:50" user="tombmyst" host="DESKTOP-CM0B76I"/>
   </section>
   <section name="files">
+    <file name="src\TODO.txt">
+      <config load="0" scan="0" panel="1" warn="1" lastopen="1" sortindex="1" panelstate="++"/>
+      <fingerprint md5="ccecb7fd893c6f4c1e7480ce2c00f189"/>
+    </file>
+    <file name="src\empire\empire.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="2" panelstate="+++"/>
+      <fingerprint md5="3b92482a027fe6319d2899ed8747e137"/>
+    </file>
     <file name="src\headers.pbi">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="3" panelstate="++"/>
       <fingerprint md5="3193978d66feadb86d32a19a2c595314"/>
+    </file>
+    <file name="PureBasic.pb">
+      <config load="0" scan="1" panel="1" warn="0" lastopen="1" sortindex="4" panelstate="+"/>
+    </file>
+    <file name="src\ide\resources.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="5" panelstate="+++"/>
+      <fingerprint md5="da7bd0d276c314a337905787aa10dcd0"/>
     </file>
     <file name="src\global.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="6" panelstate="++"/>
       <fingerprint md5="19544bf23bb3c73bc7e9d21aafed1900"/>
     </file>
+    <file name="src\images\enums.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="7" panelstate="+++"/>
+      <fingerprint md5="9a2ecd76746d4792d7b1230183dd6b5d"/>
+    </file>
+    <file name="src\ui\enums.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="8" panelstate="+++"/>
+      <fingerprint md5="df8f2865825766e82bf2de33ae55052d"/>
+    </file>
+    <file name="Commandline.pb">
+      <config load="0" scan="1" panel="1" warn="0" lastopen="1" sortindex="9" panelstate="+"/>
+    </file>
+    <file name="src\ide\args.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="10" panelstate="+++"/>
+      <fingerprint md5="68732716d9862ea4a820f86180a94400"/>
+    </file>
+    <file name="src\ide\ide_constants.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="11" panelstate="+++"/>
+      <fingerprint md5="ee328ad61ff9bffee40a7e21c921c989"/>
+    </file>
+    <file name="src\empire\console.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="12" panelstate="+++"/>
+      <fingerprint md5="625ac5d5bba7d2d209c666d4ea380669"/>
+    </file>
+    <file name="src\empire\pb_helpers.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="13" panelstate="+++"/>
+      <fingerprint md5="30035fc89f02332cb0153d542ff65715"/>
+    </file>
+    <file name="src\fs\pbfs.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="14" panelstate="+++"/>
+      <fingerprint md5="94ecc663df50e56398631906a231a61f"/>
+    </file>
+    <file name="src\empire\functions.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="15" panelstate="+++"/>
+      <fingerprint md5="dd712e6648b7b0fefaff9af6e88ab10b"/>
+    </file>
+    <file name="src\empire\test.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="16" panelstate="+++"/>
+      <fingerprint md5="4c201ea1e5691b193238e049f9b69eba"/>
+    </file>
+    <file name="src\empire\logger.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="17" panelstate="+++"/>
+      <fingerprint md5="42c81647372e5a5cf7ad5f8cc71404b6"/>
+    </file>
+    <file name="..\PureBasicDebugger\Misc.pb">
+      <config load="0" scan="1" panel="1" warn="0" lastopen="1" sortindex="18" panelstate="++"/>
+    </file>
+    <file name="src\empire\string_util.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="19" panelstate="+++"/>
+      <fingerprint md5="f03dd1bc12a50b9281ee3ef250f890d4"/>
+    </file>
     <file name="src\ide\regexes.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="b38cd76933b7dcbc85c3939bf5bc2fd3"/>
-    </file>
-    <file name="src\TODO.txt">
-      <config load="0" scan="0" panel="1" warn="1" lastopen="1" sortindex="1" panelstate="++"/>
-      <fingerprint md5="ccecb7fd893c6f4c1e7480ce2c00f189"/>
     </file>
     <file name="..\DialogManager\DialogManager.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="++"/>
@@ -62,9 +123,6 @@
     </file>
     <file name="..\PureBasicDebugger\MemoryViewer.pb">
       <config load="0" scan="1" panel="1" warn="0" lastopen="0" sortindex="999" panelstate="++"/>
-    </file>
-    <file name="..\PureBasicDebugger\Misc.pb">
-      <config load="0" scan="1" panel="1" warn="0" lastopen="1" sortindex="18" panelstate="++"/>
     </file>
     <file name="..\PureBasicDebugger\Plugin_Image.pb">
       <config load="0" scan="1" panel="1" warn="0" lastopen="0" sortindex="999" panelstate="++"/>
@@ -126,9 +184,6 @@
     <file name="ColorPicker.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+"/>
       <fingerprint md5="d855891680074343a2df7a97d6d2b3e2"/>
-    </file>
-    <file name="Commandline.pb">
-      <config load="0" scan="1" panel="1" warn="0" lastopen="1" sortindex="9" panelstate="+"/>
     </file>
     <file name="Common.pb">
       <config load="0" scan="1" panel="1" warn="0" lastopen="0" sortindex="999" panelstate="+"/>
@@ -289,9 +344,6 @@
     <file name="ProjectPanel.pb">
       <config load="0" scan="1" panel="1" warn="0" lastopen="0" sortindex="999" panelstate="+"/>
     </file>
-    <file name="PureBasic.pb">
-      <config load="0" scan="1" panel="1" warn="0" lastopen="1" sortindex="4" panelstate="+"/>
-    </file>
     <file name="RecentFiles.pb">
       <config load="0" scan="1" panel="1" warn="0" lastopen="0" sortindex="999" panelstate="+"/>
     </file>
@@ -360,10 +412,6 @@
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="ff014cbe83ce4c5787156c90c234b7f7"/>
     </file>
-    <file name="src\ui\enums.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="8" panelstate="+++"/>
-      <fingerprint md5="df8f2865825766e82bf2de33ae55052d"/>
-    </file>
     <file name="src\fs\enums.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="d9977630144b7d85d657aed398314a44"/>
@@ -375,10 +423,6 @@
     <file name="src\history\enums.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="e4973a673448092c0b62388578160649"/>
-    </file>
-    <file name="src\images\enums.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="7" panelstate="+++"/>
-      <fingerprint md5="9a2ecd76746d4792d7b1230183dd6b5d"/>
     </file>
     <file name="src\ide\timers.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
@@ -403,18 +447,6 @@
     <file name="src\empire\fs_path.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="e3970099f691159c8e69a560c3c7d849"/>
-    </file>
-    <file name="src\empire\string_util.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="19" panelstate="+++"/>
-      <fingerprint md5="f03dd1bc12a50b9281ee3ef250f890d4"/>
-    </file>
-    <file name="src\ide\resources.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="5" panelstate="+++"/>
-      <fingerprint md5="da7bd0d276c314a337905787aa10dcd0"/>
-    </file>
-    <file name="src\empire\empire.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="2" panelstate="+++"/>
-      <fingerprint md5="b3141d29e722cda8aeb9330b53fb9dca"/>
     </file>
     <file name="src\pb_analyzer\parser.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
@@ -463,10 +495,6 @@
     <file name="src\ide\recent.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="71afa8b6f47bea8c6cc0f2ae0359d8fe"/>
-    </file>
-    <file name="src\ide\ide_constants.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="11" panelstate="+++"/>
-      <fingerprint md5="ee328ad61ff9bffee40a7e21c921c989"/>
     </file>
     <file name="src\ide\source\source_types.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="++++"/>
@@ -557,7 +585,7 @@
       <fingerprint md5="e3705c13a2a44d9a60473320684b07f2"/>
     </file>
     <file name="src\empire\date_util.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="21" panelstate="+++"/>
       <fingerprint md5="60158a6911c3863d4bc5f2eb99c0cb27"/>
     </file>
     <file name="src\empire\inline_if.pb">
@@ -568,41 +596,17 @@
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="d71aef955848b04f424d3f87047d35f7"/>
     </file>
-    <file name="src\empire\logger.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="17" panelstate="+++"/>
-      <fingerprint md5="daf2d38fa851cf9f987000be47e21ce7"/>
-    </file>
     <file name="src\empire\snippets\os_macros.pbi">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="++++"/>
       <fingerprint md5="35bcf88222b1e15664ed113cff5d4943"/>
-    </file>
-    <file name="src\empire\test.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="16" panelstate="+++"/>
-      <fingerprint md5="4c201ea1e5691b193238e049f9b69eba"/>
     </file>
     <file name="src\empire\error_codes.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+++"/>
       <fingerprint md5="7bac71443e3a0cf5d2053f2666968013"/>
     </file>
-    <file name="src\ide\args.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="10" panelstate="+++"/>
-      <fingerprint md5="68732716d9862ea4a820f86180a94400"/>
-    </file>
-    <file name="src\empire\console.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="12" panelstate="+++"/>
-      <fingerprint md5="625ac5d5bba7d2d209c666d4ea380669"/>
-    </file>
-    <file name="src\empire\pb_helpers.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="13" panelstate="+++"/>
-      <fingerprint md5="30035fc89f02332cb0153d542ff65715"/>
-    </file>
-    <file name="src\empire\functions.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="15" panelstate="+++"/>
-      <fingerprint md5="dd712e6648b7b0fefaff9af6e88ab10b"/>
-    </file>
-    <file name="src\fs\pbfs.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="14" panelstate="+++"/>
-      <fingerprint md5="6ce7ff5e4f4426f828f5fcdbff0ad3ea"/>
+    <file name="src\empire\cache.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="20" panelstate="+++"/>
+      <fingerprint md5="4788c44d63f7640f0e9722c720558020"/>
     </file>
   </section>
   <section name="targets">
