@@ -73,7 +73,7 @@ Module Logger
 	Declare.s _to_yyyy_mm_dd_hh_ii_ss(date_.l, date_separator.s = "/", datetime_separator.s = " ", time_separator.s = ":") 
 	Declare.s _join(with_.s, s1.s, s2.s, s3.s="")
 	
-	CompilerIf Defined(__LOG_LEVEL__, #PB_Constant) = false
+	CompilerIf Not Defined(__LOG_LEVEL__, #PB_Constant)
 		#__LOG_LEVEL__ = ""
 	CompilerEndIf
 	
@@ -261,11 +261,3 @@ Module Logger
 		ProcedureReturn Left(result, Len(result) - Len(with_))
 	EndProcedure
 EndModule
-
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 96
-; FirstLine = 80
-; Folding = -----
-; Optimizer
-; EnableXP
-; DPIAware

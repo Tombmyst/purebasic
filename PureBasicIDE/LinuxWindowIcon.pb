@@ -23,7 +23,7 @@ CompilerIf #CompileLinux
   
   DataSection
     Image_LinuxWindowIcon:
-    CompilerIf #SpiderBasic
+    CompilerIf #SPIDER_BASIC
       IncludeBinary "../PureBasicIDE/data/SpiderBasic/Logo_48x48.png"
     CompilerElse
       IncludeBinary "../PureBasicIDE/data/logo/PBLogoLinux.png"

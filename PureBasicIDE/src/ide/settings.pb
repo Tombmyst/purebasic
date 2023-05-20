@@ -57,14 +57,33 @@
 		should_show_in_issues_viewer.b
 		should_show_in_procedures_viewer.b
 	EndStructure
+	
+	Structure ARGS
+		quiet_build.boolean
+		build_read_only.boolean
+		no_extensions.boolean
+		is_local.boolean
+		
+		is_portable.boolean
+		
+		initial_source_line.l
+		
+		preferences_file.s
+		templates_file.s
+		
+		tools_file.s
+		history_database_file.s
+		
+		source_path.s
+		explorer_path.s
+		
+		source.s
+		List targets.s()
+	EndStructure
+	
+	Define args.ARGS
 EndDeclareModule
 
 Module Settings
-	
+		
 EndModule
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 57
-; Folding = -
-; Optimizer
-; EnableXP
-; DPIAware

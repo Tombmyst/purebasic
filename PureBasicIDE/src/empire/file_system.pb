@@ -1,6 +1,4 @@
 ﻿DeclareModule FileSystem : UseModule EmpireCommons
-	Declare.boolean is_directory(path.s)
-	
 	Macro safe_close_file(file_handle)
 		If (file_handle And IsFile(file_handle))
 			CloseFile(file_handle)
@@ -10,20 +8,28 @@
 	Macro file_exists(file)
 		Bool(FileSize(file) >= 0)
 	EndMacro
+	
+	Macro is_directory(path)
+		Bool(FileSize(path) = -2)
+	EndMacro
+	
+	Macro sep
+		CompilerIf #PB_Compiler_OS = #PB_OS_Windows
+			"\"
+		CompilerElse
+			"/"
+		CompilerEndIf
+	EndMacro
+
+	Declare.s terminate_path_by_separator(path.s)
 EndDeclareModule
 
 Module FileSystem
-	Procedure.boolean is_directory(path.s)
-		If FileSize(path) = -2
-			ProcedureReturn true
+	Procedure.s terminate_path_by_separator(path.s)
+		If (Not StringUtil::endswith(path, FileSystem::sep))
+			ProcedureReturn path + FileSystem::sep
 		EndIf
-		ProcedureReturn false
+		
+		ProcedureReturn path
 	EndProcedure
-	
-	
 EndModule
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; Folding = -
-; Optimizer
-; EnableXP
-; DPIAware

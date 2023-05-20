@@ -117,7 +117,7 @@ Module Resources : UseModule G
 			CompilerIf #SPIDER_BASIC
 				IncludeBinary "../data/SpiderBasic/Logo_48x48.png"	
 			CompilerElse
-				IncludeBinary "../data/data/logo/PBLogoLinux.png"
+				IncludeBinary "../../data/logo/PBLogoLinux.png"
 			CompilerEndIf
 		CompilerEndIf
 	EndDataSection
@@ -127,13 +127,6 @@ Module Resources : UseModule G
 			gtk_window_set_default_icon_(ImageID(ImageEnumHandles::#LINUX_WINDOW_ICON))
 		Else
 			
-		endif
+		EndIf
 	CompilerEndIf
 EndModule
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 129
-; FirstLine = 52
-; Folding = ---
-; Optimizer
-; EnableXP
-; DPIAware

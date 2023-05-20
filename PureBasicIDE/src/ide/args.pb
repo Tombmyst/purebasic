@@ -34,12 +34,13 @@ Module Args : UseModule G
 					OpenConsole(IDEConstants::#PROGRAM_NAME + " v. " + IDEConstants::#PROGRAM_VERSION)
 					Logger::useConsole()
 				Case "--preferences", "-p"
+					Settings::args\preferences_file = 
 				Case "--templates", "-t"
 				Case "--tools", "-o"
 				Case "--history", "-H"
 				Case "--source-path", "-s"
 				Case "--explorer-path", "-e"
-				Case "--line", "-l"
+				Case "--initial-line", "-l"
 				Case "--build", "-b"
 				Case "--target", "-T"
 				Case "--quiet", "-q"

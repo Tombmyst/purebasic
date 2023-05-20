@@ -49,9 +49,75 @@ EndDeclareModule
 Module __UNSORTED__
 	
 EndModule
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 27
-; Folding = -
-; Optimizer
-; EnableXP
-; DPIAware
+
+; Max number of children that any container can have.
+;
+#MAX_CHILDLIST = 100
+
+Macro Dialog_CompilerOptionsMacro()
+  CompilerIf Defined(IDE_ProjectCompilerOptions, #PB_Constant)
+    Dialog_ProjectCompilerOptions:
+  CompilerElse
+    Dialog_CompilerOptions:
+  CompilerEndIf
+EndMacro
+
+Enumeration 1
+  #DIALOG_Window
+  #DIALOG_Shortcut ; not a real object, only used during dialog creation
+  
+  #DIALOG_Button
+  #DIALOG_Checkbox
+  #DIALOG_Image
+  #DIALOG_Option
+  #DIALOG_ListView
+  #DIALOG_ListIcon
+  #DIALOG_Tree
+  #DIALOG_Container
+  #DIALOG_ComboBox
+  #DIALOG_Text
+  #DIALOG_String
+  #DIALOG_Panel
+  #DIALOG_Tab
+  #DIALOG_Scroll
+  #DIALOG_Frame
+  #DIALOG_Item
+  #DIALOG_Column
+  #DIALOG_Editor
+  #DIALOG_Scintilla
+  #DIALOG_ScrollBar
+  #DIALOG_ProgressBar
+  #DIALOG_ExplorerList
+  #DIALOG_ExplorerTree
+  #DIALOG_ExplorerCombo
+  #DIALOG_Splitter
+  #DIALOG_ShortcutGadget
+  #DIALOG_ButtonImage
+  #DIALOG_TrackBar
+  #DIALOG_HyperLink
+  
+  ; virtual packing objects
+  #DIALOG_VBox
+  #DIALOG_HBox
+  #DIALOG_Multibox
+  #DIALOG_Singlebox
+  #DIALOG_Gridbox
+  #DIALOG_Empty
+EndEnumeration
+
+; Alignment Properties
+;
+Enumeration ; also used for left, center, right
+  #Dlg_Align_Top = 1 ; do not include 0 for better testing
+  #Dlg_Align_Center
+  #Dlg_Align_Bottom
+EndEnumeration
+
+; Expansion Properties
+;
+Enumeration
+  #Dlg_Expand_Yes = 1
+  #Dlg_Expand_No
+  #Dlg_Expand_Equal
+  #Dlg_Expand_Item
+EndEnumeration

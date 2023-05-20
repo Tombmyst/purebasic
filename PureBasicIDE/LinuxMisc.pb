@@ -89,19 +89,19 @@ CompilerIf #CompileLinux
     TempPath$         = "/tmp/"
     
     If PreferencesFile$ = "" ; Only change if not set by commandline
-      PreferencesFile$  = PureBasicConfigPath() + #PreferenceFileName$
+      PreferencesFile$  = Resources::get_configuration_path() + #PreferenceFileName$
     EndIf
     
     If AddToolsFile$ = "" ; Only change if not set by commandline
-      AddToolsFile$     = PureBasicConfigPath() + "tools.prefs"
+      AddToolsFile$     = Resources::get_configuration_path() + "tools.prefs"
     EndIf
     
     If TemplatesFile$ = "" ; Only change if not set by commandline
-      TemplatesFile$    = PureBasicConfigPath() + "templates.prefs"
+      TemplatesFile$    = Resources::get_configuration_path() + "templates.prefs"
     EndIf
     
     If HistoryDatabaseFile$ = "" ; Only change if not set by commandline
-      HistoryDatabaseFile$ = PureBasicConfigPath() + "history.db"
+      HistoryDatabaseFile$ = Resources::get_configuration_path() + "history.db"
     EndIf
     
     If SourcePathSet = 0

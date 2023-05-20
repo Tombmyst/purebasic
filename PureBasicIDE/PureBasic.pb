@@ -19,13 +19,7 @@ CompilerEndIf
 ;   To not get a duplicate label error, the generated label in the file is actually
 ;   a macro which is replaced with the real label on compilation
 ;
-; Macro Dialog_CompilerOptionsMacro()
-;   CompilerIf Defined(IDE_ProjectCompilerOptions, #PB_Constant)
-;     Dialog_ProjectCompilerOptions:
-;   CompilerElse
-;     Dialog_CompilerOptions:
-;   CompilerEndIf
-; EndMacro
+
 
 ;W__time.q = ElapsedMilliseconds()
 

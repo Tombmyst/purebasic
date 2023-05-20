@@ -219,7 +219,7 @@ CompilerIf #CompileWindows = 0
     ;
     *pCommandData\i = 0
     
-    CompilerIf #CompileMac And #CompileArm64
+    CompilerIf #PB_Compiler_OS = #PB_OS_MacOS And #PB_Compiler_64Bit
       If IsPipeData(fileno_(*This\InPipeHandle)) = #False
         ProcedureReturn #False
       EndIf

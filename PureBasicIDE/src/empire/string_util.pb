@@ -3,6 +3,18 @@
 	Declare.s first_not_empty(s1.s, s2.s="", s3.s="", s4.s="")
 	Declare.s join(with_.s, s1.s, s2.s, s3.s="")
 	Declare.s join5(with_.s, s1.s, s2.s, s3.s="", s4.s="", s5.s="")
+	
+	Macro startswith(string_, with_)
+		Bool(Left(string_, Len(with_)) = with_)
+	EndMacro
+	
+	Macro endswith(string_, with_)
+		Bool(Right(string_, Len(with_)) = with_)
+	EndMacro
+	
+	Macro char_at(string_, pos)
+		Mid(string, pos, 1)
+	EndMacro
 EndDeclareModule
 
 Module StringUtil

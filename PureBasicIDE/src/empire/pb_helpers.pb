@@ -1,8 +1,8 @@
 ﻿DeclareModule PB
 	; When coming from languages where the for loop excludes *end_* itself
 	; this can be error prone, hence this short macro
-	Macro xfor(var, start, end_)
-		For var = start To end_ - 1
+	Macro xfor(var, start, end_, step_ = 1)
+		For var = start To end_ - 1 Step step_
 	EndMacro
 EndDeclareModule
 
