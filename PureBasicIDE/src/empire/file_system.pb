@@ -20,16 +20,8 @@
 			"/"
 		CompilerEndIf
 	EndMacro
-
-	Declare.s terminate_path_by_separator(path.s)
 EndDeclareModule
 
 Module FileSystem
-	Procedure.s terminate_path_by_separator(path.s)
-		If (Not StringUtil::endswith(path, FileSystem::sep))
-			ProcedureReturn path + FileSystem::sep
-		EndIf
-		
-		ProcedureReturn path
-	EndProcedure
+	
 EndModule

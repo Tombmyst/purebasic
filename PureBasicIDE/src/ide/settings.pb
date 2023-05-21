@@ -1,4 +1,4 @@
-﻿DeclareModule Settings
+﻿DeclareModule Settings : UseModule G
 	Enumeration
 		#SAVE_SETTINGS_AT_END_OF_FILE
 		#SAVE_SETTINGS_PER_FILE_CFG
@@ -78,6 +78,9 @@
 		explorer_path.s
 		
 		source.s
+		build_project_file.s
+		
+		update_check_file.s
 		List targets.s()
 	EndStructure
 	

@@ -23,6 +23,10 @@ DeclareModule G
 	Macro true : 1 : EndMacro
 	Macro null : 0 : EndMacro
 	Macro boolean : b : EndMacro
+	Macro __PROC__ : #PB_Compiler_Procedure : EndMacro
+	Macro __MODULE__ : #PB_Compiler_Module : EndMacro
+	Macro __FILE__ : #PB_Compiler_File : EndMacro
+	Macro __LINE__ : #PB_Compiler_Line : EndMacro
 		
 	Macro __LOG__ : #PB_Compiler_File, #PB_Compiler_Module, #PB_Compiler_Procedure, #PB_Compiler_Line : EndMacro
 		

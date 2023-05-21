@@ -13,7 +13,7 @@
 	EndMacro
 	
 	Macro char_at(string_, pos)
-		Mid(string, pos, 1)
+		Mid(string_, pos, 1)
 	EndMacro
 EndDeclareModule
 

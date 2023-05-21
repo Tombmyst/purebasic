@@ -1,4 +1,4 @@
-﻿DeclareModule PBFileSystem
+﻿DeclareModule PBFileSystem : UseModule G
 	; Creates a unique representation of a filename, by doing this:
 	;  - replaces any "../directory" parts to get a direct path
 	;  - cutting any "./" in the path
@@ -29,29 +29,33 @@ EndDeclareModule
 
 Module PBFileSystem : UseModule G
 	Procedure.s normalize_filename(path.s)
-		If path = ""
+		If (path = "")
 			ProcedureReturn ""
+		ElseIf (LRUCache::contains(__PROC__, path))
+			ProcedureReturn LRUCache::get_string(__PROC__, path)
 		EndIf
+		provided_path.s = path
 		
 		path = uniformize_separators_according_to_os(path)
 		separator_code.c = Asc(#Separator)
 		
-		*current_char.Character = @FileName$
+		*current_char.Character = @path
 		While *current_char\c
 			
 			If *current_char\c = separator_code
 				If PeekS(*current_char, 4) = #Separator + ".." + #Separator
 					; remove the previous directory name
 					*previous_char.Character = *current_char - #CHARSIZE
-					While *previous_char >= @FileName$
+					While *previous_char >= @path
 						If *previous_char\c = separator_code
 							Break
 						EndIf
 						*previous_char - #CHARSIZE
 					Wend
 					
-					If *previous_char < @FileName$
+					If *previous_char < @path
 						; oops, more ".." in the string than directories!
+						LRUCache::store_string(__PROC__, provided_path, "")
 						ProcedureReturn ""
 					EndIf
 					
@@ -75,6 +79,8 @@ Module PBFileSystem : UseModule G
 				*current_char + #CHARSIZE
 			EndIf
 		Wend
+		
+		LRUCache::store_string(__PROC__, provided_path, path)
 	EndProcedure
 	
 	
@@ -106,6 +112,11 @@ Module PBFileSystem : UseModule G
 			ProcedureReturn ""
 		EndIf
 		
+		key.s = base_path + file_name
+		If (LRUCache::contains(__PROC__, key))
+			ProcedureReturn LRUCache::get_string(__PROC__, key)
+		EndIf
+		
 		base_path = PBFileSystem::normalize_filename(base_path)
 		file_name = PBFileSystem::normalize_filename(file_name)
 		
@@ -113,29 +124,33 @@ Module PBFileSystem : UseModule G
 			If (Mid(base_path, 2, 1) = ":" And Mid(file_name, 2, 1) = ":")
 				; Both have drive letters.. check the drive match
 				If (UCase(Left(base_path, 1) <> UCase(Left(file_name, 1)))
+					LRUCache::store_string(__PROC__, key, file_name)
 					ProcedureReturn file_name
 				EndIf
 			ElseIf (Left(base_path, 2) = "\\" And Left(file_name, 2) = "\\")
 				; Both are network paths, check if the computer name matches
 				If (UCase(StringField(base_path, 3, "\")) <> UCase(StringField(file_name, 3, "\")))
+					LRUCache::store_string(__PROC__, key, file_name)
 					ProcedureReturn file_name
 				EndIf
 			Else
 				; Either a mix of Network/non-network paths, or not full paths at all
+				LRUCache::store_string(__PROC__, key, file_name)
 				ProcedureReturn file_name
 			EndIf
 		CompilerElse
 			If (Left(base_path, 1) <> "/" Or Left(file_name, 1) <> "/")
+				LRUCache::store_string(__PROC__, key, file_name)
 				ProcedureReturn file_name
 			EndIf
 		CompilerEndIf
 		
-		base_path = FileSystem::terminate_path_by_separator(base_path)
+		base_path = Path::terminate_path_by_separator(base_path)
 		
 		old_file_name.s = file_name
 		
 		PB::xfor(index, Len(base_path), 0, -1)
-			If (StringUtil::char_at(base, index) = FileSystem::sep)
+			If (StringUtil::char_at(base_path, index) = Path::#SEPARATOR)
 				CompilerIf #__LINUX__
 					case_mode.b = #PB_String_CaseSensitive
 				CompilerElse
@@ -150,7 +165,7 @@ Module PBFileSystem : UseModule G
 			EndIf
 		Next index
 		
-		count = CountString(base_path, FileSystem::sep)
+		count = CountString(base_path, Path::#SEPARATOR)
 		If (count <= 3)
 			For index = 1 To count
 				file_name = Path::join("..", file_name)
@@ -159,13 +174,43 @@ Module PBFileSystem : UseModule G
 			file_name = old_file_name
 		EndIf
 		
+		LRUCache::store_string(__PROC__, key, file_name)
 		ProcedureReturn file_name
 	EndProcedure
 	
 	Procedure.s resolve_relative_path(base_path.s, file_name.s)
 		If (base_path = "")
 			ProcedureReturn PBFileSystem::normalize_filename(file_name)
-		endif
+		EndIf
+		
+		key.s = base_path + file_name
+		If (LRUCache::contains(__PROC__, key))
+			ProcedureReturn LRUCache::get_string(__PROC__, key))
+		EndIf
+		
+		base_path = Path::terminate_path_by_separator(base_path)
+		
+		If (Not FindString(file_name, Path::#SEPARATOR, 1))
+			file_name = base_path + file_name
+			CompilerIf #__WIN__
+			ElseIf StringUtil::startswith(file_name, "\\")
+				; Network file path, Windows only (like: \\192.168.0.1\Test.pb)
+				; FileName$ remains untouched here (it contains a drive letter)
+			CompilerEndIf
+		ElseIf StringUtil::startswith(file_name, Path::#SEPARATOR)
+			CompilerIf #__WIN__
+			file_name = Left(base_path, 2) + file_name
+			ElseIf StringUtil::char_at(file_name, 2) = ":"
+				; FileName$ remains untouched here (it contains a drive letter)
+			CompilerEndIf
+			; On linux/mac. FileName is a full path, so no change
+		Else
+			file_name = base_path + file_name
+		EndIf
+		
+		file_name = PBFileSystem::normalize_filename(file_name)
+		LRUCache::store_string(__PROC__, key, file_name)
+		ProcedureReturn file_name
 	EndProcedure
 EndModule
 

@@ -8,6 +8,12 @@
 	
 	#PROGRAM_NAME = "PureBasic IDE"  ; TODO: rename
 	#PROGRAM_VERSION = "0.1"
+	
+	#HISTORY_DB_FILE = "history.db"
+	#PREFERENCES_FILE_NAME = "settings.cfg"
+	#TEMPLATE_FILE_NAME = "templates.cfg"
+	#TOOLS_FILE_NAME = "tools.cfg"
+	#UPDATE_CHECK_FILE = "update_check.json"
 EndDeclareModule
 
 Module IDEConstants
