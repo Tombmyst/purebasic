@@ -327,10 +327,3 @@ XIncludeFile ".." + Path::#SEPARATOR + "ToolsPanel.pb"
 
 ; crossplatform debugging helpers
 XIncludeFile ".." + Path::#SEPARATOR + "Debugging.pb"
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 99
-; FirstLine = 42
-; Folding = -
-; Optimizer
-; EnableXP
-; DPIAware
