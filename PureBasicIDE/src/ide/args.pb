@@ -1,13 +1,17 @@
 ﻿EnableExplicit
 DeclareModule Args
+	#SOURCE_FILE_REGEX_IDENTIFIER = "regex->"
+	
 	Declare parse_command_line()
 EndDeclareModule
 
 Module Args : UseModule G
 	Declare _show_version()
 	Declare _show_help()
-	Declare _parse_file_regex(parameter.s)
+	Declare _parse_file_regex(path.s, file_regex.s)
 	Declare _parse_file_normal(parameter.s)
+	Declare _regex_file_scanner_callback(*scanned_node.FileSystem::SCANNED_NODE, *callback_arg)
+	Declare _normal_file_scanner_callback(*scanned_node.FileSystem::SCANNED_NODE, *callback_arg)
 	
 	Procedure _show_version()
 		If (Console::is_opened())
@@ -33,7 +37,7 @@ Module Args : UseModule G
 			current_parameter = ProgramParameter(parameter_index)
 			
 			Select current_parameter
-				Case "--open_console"
+				Case "--open-console"
 					OpenConsole(IDEConstants::#PROGRAM_NAME + " v. " + IDEConstants::#PROGRAM_VERSION)
 					Logger::useConsole()
 				Case "--preferences", "-p"
@@ -59,7 +63,7 @@ Module Args : UseModule G
 					Settings::args\initial_source_line = Val(ProgramParameter(parameter_index))
 				Case "--build", "-b"
 					parameter_index + 1
-					Settings::args\build_project_file = PBFileSystem::resolve_relative_path(working_directory, ProgramParameter(parameter_index)))
+					Settings::args\build_project_file = PBFileSystem::resolve_relative_path(working_directory, ProgramParameter(parameter_index))
 				Case "--target", "-T"
 					parameter_index + 1
 					AddElement(Settings::args\targets())
@@ -97,27 +101,58 @@ Module Args : UseModule G
 				CompilerEndIf
 				Case "" ; filter out the empty string
 				Default
-					If (StringUtil::startswith(current_parameter, "regex->"))
-						_parse_file_regex(current_parameter)
+					If (FindString(current_parameter, "regex->"))
+						_parse_file_regex(StringField(current_parameter, 1, Args::#SOURCE_FILE_REGEX_IDENTIFIER), StringField(current_parameter, 2, Args::#SOURCE_FILE_REGEX_IDENTIFIER))
 					Else
 						_parse_file_normal(current_parameter)
 					EndIf
 			EndSelect	
 		Next parameter_index
+		
+		If (Settings::args\update_check_file = "")
+			Settings::args\update_check_file = Resources::configuration_path_join_1(IDEConstants::#UPDATE_CHECK_FILE)
+		EndIf
 	EndProcedure
 	
-	Procedure _parse_file_regex(parameter.s)
+	Procedure _parse_file_regex(path.s, file_regex.s)
+		CompilerIf Path::#IS_FS_CASE_SENSITIVE
+			flags.i = null
+		CompilerElse
+			flags.i = #PB_RegularExpression_NoCase
+		CompilerEndIf
 		
+		file_scanner_regex.i = CreateRegularExpression(#PB_Any, file_regex, flags)
+		If (Not file_scanner_regex)
+			Logger::error("Could not create regex with '" + file_regex + "'. Error: " + RegularExpressionError(), __LOG__)
+			ProcedureReturn
+		EndIf
+		
+		path = PBFileSystem::resolve_relative_path(GetCurrentDirectory(), path)
+		path = Path::terminate_path_by_separator(path)
+		FileSystem::scan_directory(path, @_regex_file_scanner_callback(), true, file_scanner_regex)
+		FreeRegularExpression(file_scanner_pattern)
 	EndProcedure
 	
 	Procedure _parse_file_normal(parameter.s)
-		
+		If (Not FindString(parameter, "*", 1) And Not FindString(parameter, "?", 1))
+			ListUtil::append(Settings::args\files_to_open, parameter)
+		Else
+			path.s = PBFileSystem::resolve_relative_path(GetCurrentDirectory(), GetPathPart(path))
+			path = Path::terminate_path_by_separator(path)
+			
+			FileSystem::scan_directory(path, @_normal_file_scanner_callback(), true, null, GetFilePart(parameter))
+		EndIf
+	EndProcedure
+	
+	Procedure _regex_file_scanner_callback(*scanned_node.FileSystem::SCANNED_NODE, *callback_arg)
+		If (*scanned_node\is_file And MatchRegularExpression(*callback_arg, *scanned_node\name))
+			ListUtil::append(Settings::args\files_to_open, *scanned_node\path)
+		EndIf
+	EndProcedure
+	
+	Procedure _normal_file_scanner_callback(*scanned_node.FileSystem::SCANNED_NODE, *callback_arg)
+		If (*scanned_node\is_file)
+			ListUtil::append(Settings::args\files_to_open, *scanned_node\path)
+		EndIf
 	EndProcedure
 EndModule
-
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 5
-; Folding = --
-; Optimizer
-; EnableXP
-; DPIAware

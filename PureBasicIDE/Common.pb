@@ -10,6 +10,7 @@
 ; used for portable code like the HighlightingEngine.or the FormDesigner
 ;
 #PUREBASIC_IDE = 1
+UnuseModule EmpireCommons
 UseModule G
 
 CompilerIf #SPIDER_BASIC
@@ -2864,10 +2865,3 @@ CompilerEndIf
 
 UseMD5Fingerprint()
 UseCRC32Fingerprint()
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 2546
-; FirstLine = 2546
-; Folding = -----
-; Optimizer
-; EnableXP
-; DPIAware

@@ -3,6 +3,7 @@
 	
 	Declare.s get_configuration_path()
 	Declare.s get_bin_path()	
+	Declare.s get_tests_path()
 	
 	Macro configuration_path_join_1(path_element)
 		Path::join(Resources::get_configuration_path(), path_element)
@@ -60,6 +61,10 @@ Module Resources : UseModule G
 	
 	Procedure.s get_bin_path()
 		ProcedureReturn Path::join("..", "bin")
+	EndProcedure
+	
+	Procedure.s get_tests_path()
+		ProcedureReturn Path::join("..", "..", "tests")
 	EndProcedure
 	
 	DataSection ;- Embedded data

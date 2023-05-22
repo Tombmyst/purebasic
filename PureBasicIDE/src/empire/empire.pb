@@ -11,6 +11,7 @@ XIncludeFile "cache.pb"
 XIncludeFile "inline_if.pb"
 XIncludeFile "date_util.pb"
 
+XIncludeFile "list_util.pb"
 XIncludeFile "string_util.pb"
 XIncludeFile "math.pb"
 
@@ -18,7 +19,7 @@ XIncludeFile "fs_path.pb"
 XIncludeFile "file_system.pb"
 
 XIncludeFile "functions.pb"
-
+UnuseModule EmpireCommons
 ; CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 ; 	
 ; CompilerElse

@@ -471,7 +471,7 @@ Procedure SendDebuggerCommandWithData(*Debugger.DebuggerData, *Command.CommandIn
       Event\send_event   = 1
       Event\message_type = gdk_atom_intern_("PureBasic_Break", 0)
       Event\data_format  = 32
-      gdk_event_send_clientmessage_toall_(@Event)
+      ;gdk_event_send_clientmessage_toall_(@Event)
     CompilerEndIf
   EndIf
 EndProcedure

@@ -1,4 +1,4 @@
-﻿DeclareModule LRUCache : UseModule G
+﻿DeclareModule LRUCache : UseModule EmpireCommons
 	Declare store_byte(domain.s, key.s, value.b)
 	Declare.b get_byte(domain.s, key.s, default_.b=0)
 	
@@ -104,15 +104,15 @@ Module LRUCache : UseModule EmpireCommons
 	Global NewMap _cache._STRUCT_CACHE_ITEM()
 	Global NewList _recent_used_items.s()
 	
-	Procedure store_byte(domain.s, key.s, value.b) : store_item(key, value, #_TYPE_BYTE) : EndProcedure
-	Procedure store_unsigned_byte(domain.s, key.s, value.a) : store_item(key, value, #_TYPE_UNSIGNED_BYTE) : EndProcedure
-	Procedure store_word(domain.s, key.s, value.w) : store_item(key, value, #_TYPE_WORD) : EndProcedure
-	Procedure store_unsigned_word(domain.s, key.s, value.u) : store_item(key, value, #_TYPE_UNSIGNED_WORD) : EndProcedure
-	Procedure store_long(domain.s, key.s, value.l) : store_item(key, value, #_TYPE_LONG) : EndProcedure
-	Procedure store_quad(domain.s, key.s, value.q) : store_item(key, value, #_TYPE_QUAD) : EndProcedure
-	Procedure store_float(domain.s, key.s, value.f) : store_item(key, value, #_TYPE_FLOAT) : EndProcedure
-	Procedure store_double(domain.s, key.s, value.d) : store_item(key, value, #_TYPE_DOUBLE) : EndProcedure
-	Procedure store_string(domain.s, key.s, value.s) : store_item_str(key, value) : EndProcedure
+	Procedure store_byte(domain.s, key.s, value.b) : store_item(domain, key, value, #_TYPE_BYTE) : EndProcedure
+	Procedure store_unsigned_byte(domain.s, key.s, value.a) : store_item(domain, key, value, #_TYPE_UNSIGNED_BYTE) : EndProcedure
+	Procedure store_word(domain.s, key.s, value.w) : store_item(domain, key, value, #_TYPE_WORD) : EndProcedure
+	Procedure store_unsigned_word(domain.s, key.s, value.u) : store_item(domain, key, value, #_TYPE_UNSIGNED_WORD) : EndProcedure
+	Procedure store_long(domain.s, key.s, value.l) : store_item(domain, key, value, #_TYPE_LONG) : EndProcedure
+	Procedure store_quad(domain.s, key.s, value.q) : store_item(domain, key, value, #_TYPE_QUAD) : EndProcedure
+	Procedure store_float(domain.s, key.s, value.f) : store_item(domain, key, value, #_TYPE_FLOAT) : EndProcedure
+	Procedure store_double(domain.s, key.s, value.d) : store_item(domain, key, value, #_TYPE_DOUBLE) : EndProcedure
+	Procedure store_string(domain.s, key.s, value.s) : store_item_str(domain, key, value) : EndProcedure
 	
 	Procedure store_item_str(domain.s, key.s, value.s)
 		effective_key.s = make_effective_key(domain, key)
@@ -316,9 +316,7 @@ CompilerIf __IS_TESTING__
 	Test::assert(Bool(LRUCache::get_string("", "rogere") = "solange"), "Stored string")
 	Test::assert(Bool(LRUCache::get_string("", "raoul") = "carlos"), "Stored string in procedure")
 	Test::assert(Bool(LRUCache::get_string("", "berangere") = "raymonde"), "Stored string in procedure from variable")
-	
-	Debug "##############################################"
-	Debug LRUCache::get_float("", "a_float")
+
 	Test::assert(Bool(LRUCache::get_float("", "a_float") = 3.14), "Stored float")
 	Test::assert(Bool(LRUCache::get_double("", "a_double") = 4.343434), "Stored float in procedure (a double actually)")
 	Test::assert(Bool(LRUCache::get_float("", "b_float") = 1.23), "Stored float in procedure from variable")

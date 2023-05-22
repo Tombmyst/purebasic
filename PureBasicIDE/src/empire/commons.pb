@@ -8,6 +8,11 @@ DeclareModule EmpireCommons
 	Macro null : 0 : EndMacro
 	Macro boolean : b : EndMacro
 	
+	Macro __PROC__ : #PB_Compiler_Procedure : EndMacro
+	Macro __MODULE__ : #PB_Compiler_Module : EndMacro
+	Macro __FILE__ : #PB_Compiler_File : EndMacro
+	Macro __LINE__ : #PB_Compiler_Line : EndMacro
+	
 	Macro __LOG__ : #PB_Compiler_File, #PB_Compiler_Module, #PB_Compiler_Procedure, #PB_Compiler_Line : EndMacro
 		
 	CompilerIf #PB_Compiler_OS = #PB_OS_Windows
@@ -31,9 +36,3 @@ Module EmpireCommons
 		End code
 	EndProcedure
 EndModule
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 22
-; Folding = --
-; Optimizer
-; EnableXP
-; DPIAware

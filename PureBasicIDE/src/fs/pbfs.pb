@@ -151,7 +151,7 @@ Module PBFileSystem : UseModule G
 		
 		PB::xfor(index, Len(base_path), 0, -1)
 			If (StringUtil::char_at(base_path, index) = Path::#SEPARATOR)
-				CompilerIf #__LINUX__
+				CompilerIf Path::#IS_FS_CASE_SENSITIVE
 					case_mode.b = #PB_String_CaseSensitive
 				CompilerElse
 					case_mode.b = #PB_String_NoCase
@@ -185,7 +185,7 @@ Module PBFileSystem : UseModule G
 		
 		key.s = base_path + file_name
 		If (LRUCache::contains(__PROC__, key))
-			ProcedureReturn LRUCache::get_string(__PROC__, key))
+			ProcedureReturn LRUCache::get_string(__PROC__, key)
 		EndIf
 		
 		base_path = Path::terminate_path_by_separator(base_path)
@@ -215,8 +215,12 @@ Module PBFileSystem : UseModule G
 EndModule
 
 CompilerIf __IS_TESTING__
-	UseModule G
-	Test::assert(Bool(PBFileSystem::uniformize_separators_according_to_os("roger/gontrand\telesphore") = "roger\gontrand\telesphore"), "Test uniformize_separators_accord_to_os() normal")
+	UseModule EmpireCommons
+	CompilerIf #__WIN__
+		Test::assert(Bool(PBFileSystem::uniformize_separators_according_to_os("roger/gontrand\telesphore") = "roger\gontrand\telesphore"), "Test uniformize_separators_accord_to_os() normal")	
+	CompilerElse
+		Test::assert(Bool(PBFileSystem::uniformize_separators_according_to_os("roger/gontrand\telesphore") = "roger/gontrand/telesphore"), "Test uniformize_separators_accord_to_os() normal")
+	CompilerEndIf
 	Test::assert(Bool(PBFileSystem::uniformize_separators_according_to_os("roger") = "roger"), "Test uniformize_separators_accord_to_os() no separators")
 	Test::assert(Bool(PBFileSystem::uniformize_separators_according_to_os("") = ""), "Test uniformize_separators_accord_to_os() empty string")
 CompilerEndIf

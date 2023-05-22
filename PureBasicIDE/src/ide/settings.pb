@@ -82,6 +82,8 @@
 		
 		update_check_file.s
 		List targets.s()
+		
+		List files_to_open.s()
 	EndStructure
 	
 	Define args.ARGS

@@ -1,8 +1,14 @@
-﻿DeclareModule Path
+﻿DeclareModule Path : UseModule EmpireCommons
 	CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 		#SEPARATOR = "\"
 	CompilerElse
 		#SEPARATOR = "/"
+	CompilerEndIf
+	
+	CompilerIf #__LINUX__
+		#IS_FS_CASE_SENSITIVE = true
+	CompilerElse
+		#IS_FS_CASE_SENSITIVE = false
 	CompilerEndIf
 	
 	Declare.s terminate_path_by_separator(path.s)

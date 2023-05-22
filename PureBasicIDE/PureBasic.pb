@@ -27,7 +27,8 @@ CompilerEndIf
 
 ; This must be before anything else, as it affects path settings and such
 ;
-ParseCommandline()
+;ParseCommandline()
+
 
 If CommandlineBuild
   OpenConsole()
