@@ -6,7 +6,7 @@
 	#MAX_TOOLS = 100
 	#MAX_USER_LIBRARIES_HELP_FILES = 100
 	
-	#PROGRAM_NAME = "PureBasic IDE"  ; TODO: rename
+	#PROGRAM_NAME = "TIDE"  ; TODO: rename
 	#PROGRAM_VERSION = "0.1"
 	
 	#HISTORY_DB_FILE = "history.db"

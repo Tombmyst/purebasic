@@ -2,6 +2,7 @@
 	Declare load()
 	
 	Declare.s get_configuration_path()
+	Declare.s get_settings_path()
 	Declare.s get_bin_path()	
 	Declare.s get_tests_path()
 	
@@ -57,6 +58,10 @@ Module Resources : UseModule G
 		
 		_cached_configuration_path = configuration_path
 		ProcedureReturn configuration_path
+	EndProcedure
+	
+	Procedure.s get_settings_path()
+		ProcedureReturn Resources::configuration_path_join_1("tide.json")
 	EndProcedure
 	
 	Procedure.s get_bin_path()

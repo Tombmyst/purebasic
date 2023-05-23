@@ -46,14 +46,14 @@ DeclareModule Logger : UseModule EmpireCommons
 	Declare useConsole()
 	Declare setLogFile(file.s, should_append.boolean = false)
 	
-	Declare trace(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-	Declare dbg(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-	Declare success(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-	Declare info(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-	Declare warn(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-	Declare error(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-	Declare severe(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-	Declare fatal(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
+	Declare trace(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+	Declare dbg(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+	Declare success(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+	Declare info(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+	Declare warn(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+	Declare error(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+	Declare severe(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+	Declare fatal(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
 	
 	Declare setLogLevel(level.b, outlet.b)
 EndDeclareModule
@@ -106,47 +106,56 @@ Module Logger
 		EndSelect
 	EndProcedure
 	
-	Procedure trace(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-		_log(LogLevel::#_TRACE, message, fileName, moduleName, procedureName, lineNumber)
+	Procedure trace(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+		_log(LogLevel::#_TRACE, message, fileName, moduleName, procedureName, lineNumber, show_dialog)
 	EndProcedure
 	
-	Procedure dbg(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-		_log(LogLevel::#_DEBUG, message, fileName, moduleName, procedureName, lineNumber)
+	Procedure dbg(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+		_log(LogLevel::#_DEBUG, message, fileName, moduleName, procedureName, lineNumber, show_dialog)
 	EndProcedure
 	
-	Procedure success(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-		_log(LogLevel::#_SUCCESS, message, fileName, moduleName, procedureName, lineNumber)
+	Procedure success(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+		_log(LogLevel::#_SUCCESS, message, fileName, moduleName, procedureName, lineNumber, show_dialog)
 	EndProcedure
 	
-	Procedure info(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-		_log(LogLevel::#_INFO, message, fileName, moduleName, procedureName, lineNumber)
+	Procedure info(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+		_log(LogLevel::#_INFO, message, fileName, moduleName, procedureName, lineNumber, show_dialog)
 	EndProcedure
 	
-	Procedure warn(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-		_log(LogLevel::#_WARN, message, fileName, moduleName, procedureName, lineNumber)
+	Procedure warn(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+		_log(LogLevel::#_WARN, message, fileName, moduleName, procedureName, lineNumber, show_dialog)
 	EndProcedure
 	
-	Procedure error(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-		_log(LogLevel::#_ERROR, message, fileName, moduleName, procedureName, lineNumber)
+	Procedure error(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+		_log(LogLevel::#_ERROR, message, fileName, moduleName, procedureName, lineNumber, show_dialog)
 	EndProcedure
 	
-	Procedure severe(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-		_log(LogLevel::#_SEVERE, message, fileName, moduleName, procedureName, lineNumber)
+	Procedure severe(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+		_log(LogLevel::#_SEVERE, message, fileName, moduleName, procedureName, lineNumber, show_dialog)
 	EndProcedure
 	
-	Procedure fatal(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
-		_log(LogLevel::#_FATAL, message, fileName, moduleName, procedureName, lineNumber)
+	Procedure fatal(message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
+		_log(LogLevel::#_FATAL, message, fileName, moduleName, procedureName, lineNumber, show_dialog)
 	EndProcedure
 	
-	Procedure _log(level.b, message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
+	Procedure _log(level.b, message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog = false)
 		If Not _should_log(level)
-			Debug "patate"
-			Debug level
-			Debug _logLevelConsole
 			ProcedureReturn
 		EndIf
 		
 		logString.s = _produceLogString(level, message, fileName, moduleName, procedureName, lineNumber)
+		
+		If (show_dialog)
+			Select (level)
+				Case LogLevel::#_TRACE, LogLevel::#_DEBUG, LogLevel::#_SUCCESS, LogLevel::#_INFO
+					icon.i = #PB_MessageRequester_Info
+				Case LogLevel::#_WARN
+					icon.i = #PB_MessageRequester_Warning
+				Default
+					icon.i = #PB_MessageRequester_Error
+			EndSelect
+			MessageRequester(_logLevelToString(level), _produce_log_string_for_dialog(message, fileName, moduleName, procedureName, lineNumber), icon)
+		EndIf
 		
 		If (_uses_console And level >= _logLevelConsole)
 			fore.b = 0
@@ -167,6 +176,10 @@ Module Logger
 	
 	Procedure.s _produceLogString(level.b, message.s, fileName.s, moduleName.s, procedureName.s, lineNumber.i)
 		ProcedureReturn "[" + _to_yyyy_mm_dd_hh_ii_ss(Date()) + "] [" + _logLevelToString(level) + "] " + _handleFileModuleProcedureLineNumber(fileName, moduleName, procedureName, lineNumber) + " " + message
+	EndProcedure
+	
+	Procedure.s _produce_log_string_for_dialog(message.s, fileName.s, moduleName.s, procedureName.s, lineNumber.i)
+		ProcedureReturn "[" + _to_yyyy_mm_dd_hh_ii_ss(Date()) + "] " +  _handleFileModuleProcedureLineNumber(fileName, moduleName, procedureName, lineNumber) + " " + message
 	EndProcedure
 	
 	Procedure.s _logLevelToString(level.b)

@@ -61,6 +61,7 @@
 	EndMacro
 	
 	Declare scan_directory(path.s, *callback, recursive.boolean = true, *callback_arg = null, scanner_pattern.s="*.*")
+	Declare swap_files(file1.s, file2.s)
 EndDeclareModule
 
 Module FileSystem : UseModule EmpireCommons
@@ -133,6 +134,19 @@ Module FileSystem : UseModule EmpireCommons
 		Wend
 		
 		FinishDirectory(dir_examiner)
+	EndProcedure
+	
+	Procedure swap_files(file1.s, file2.s)
+		If (GetPathPart(file1) = GetPathPart(file2))
+			RenameFile(file1, file1 + ".swap")
+			RenameFile(file2, file1)
+			RenameFile(file1 + ".swap", file2)
+		Else
+			CopyFile(file1, file2 + ".swap")
+			DeleteFile(file1, #PB_FileSystem_Force)
+			CopyFile(file2, file1)
+			RenameFile(file2 + ".swap", file2)
+		endif
 	EndProcedure
 EndModule
 
