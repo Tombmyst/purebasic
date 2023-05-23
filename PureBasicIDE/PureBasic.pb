@@ -30,9 +30,9 @@ CompilerEndIf
 ;ParseCommandline()
 
 
-If CommandlineBuild
-  OpenConsole()
-EndIf
+; If CommandlineBuild
+;   OpenConsole()
+; EndIf
 
 If OSStartupCode() = 0
   End
@@ -65,7 +65,7 @@ CompilerIf #CompileMac
   EndIf
 CompilerEndIf
 
-If Editor_RunOnce And CommandlineBuild = 0
+If Editor_RunOnce And (State::get_mode() = IDEEnums::#IDE_MODE_COMMAND_LINE_BUILD)
   ; New RunOnce handling, all in one OS-specifc routine
   ; to allow a better method to be used on Windows (maybe also Linux)
   ;
@@ -98,7 +98,7 @@ Procedure CloseSplashScreen()
   EndIf
 EndProcedure
 
-If CommandlineBuild = 0 And NoSplashScreen = 0
+If (State::get_mode() = IDEEnums::#IDE_MODE_NORMAL) And NoSplashScreen = 0
   
   ; display the startup logo, as loading could take a little on slower systems..
   ; especially when lots of sources are reloaded.
@@ -141,34 +141,34 @@ If CommandlineBuild = 0 And NoSplashScreen = 0
   
 EndIf
 
-If CommandlineBuild = 0
+If (State::get_mode() = IDEEnums::#IDE_MODE_NORMAL)
   LoadTheme()
   If NoSplashScreen = 0: FlushEvents(): EndIf
 EndIf
 
 AddTools_Init() ; those must be before CreateGUI()
-If CommandlineBuild = 0 And NoSplashScreen = 0: FlushEvents(): EndIf
+If (State::get_mode() = IDEEnums::#IDE_MODE_NORMAL) And NoSplashScreen = 0: FlushEvents(): EndIf
 
 AddHelpFiles_Init()
-If CommandlineBuild = 0 And NoSplashScreen = 0: FlushEvents(): EndIf
+If (State::get_mode() = IDEEnums::#IDE_MODE_NORMAL) And NoSplashScreen = 0: FlushEvents(): EndIf
 
 ; CPUMonitor_Init() ; before creategui!
 
 ;- Commandline Project building
-If CommandlineBuild
-  CommandlineProjectBuild()
+If (State::get_mode() = IDEEnums::#IDE_MODE_COMMAND_LINE_BUILD)
+  _result_command_line_build_.b = CommandLineBuilder::old_CommandlineProjectBuild()
   
   ; commandline building should not affect IDE prefs, so no need to save them
   KillCompiler()
   DeleteRegisteredFiles()
   CompilerCleanup()
   OSEndCode()
-  CloseConsole()
+  ;CloseConsole()
   
-  If CommandlineBuildSuccess
-    End 0
+  If _result_command_line_build_
+    End ErrorCodes::#SUCCESS
   Else
-    End 1
+    End ErrorCodes::#COMMAND_LINE_BUILD_FAILED
   EndIf
 EndIf
 
@@ -605,11 +605,3 @@ DataSection
     CompilerEndIf
   
 EndDataSection
-
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 31
-; FirstLine = 17
-; Folding = ---
-; Optimizer
-; EnableXP
-; DPIAware

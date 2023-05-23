@@ -24,7 +24,65 @@ Module Args : UseModule G
 	EndProcedure
 	
 	Procedure _show_help()
-		
+; 		OpenConsole()
+; 		
+; 		CompilerIf #CompileWindows
+; 			CompilerIf #SpiderBasic
+; 				PrintN("Usage: spiderbasic [options] files...")
+; 			CompilerElse
+; 				PrintN("Usage: purebasic [options] files...")
+; 			CompilerEndIf
+; 			PrintN("")
+; 			PrintN("Options:")
+; 			PrintN("  /VERSION      Display version information and quit")
+; 			PrintN("  /HELP or /?   Display commandline help")
+; 			PrintN("")
+; 			PrintN("Launching the IDE:")
+; 			PrintN("  /P <file>      Specify a file for the IDE preferences")
+; 			PrintN("  /T <file>      Specify a file for code templates")
+; 			PrintN("  /A <file>      Specify a file for the tools settings")
+; 			PrintN("  /H <file>      Specify a file for the session history database")
+; 			PrintN("  /S <path>      Specify the initial path for source files")
+; 			PrintN("  /E <path>      Specify the initial path for the explorer tool")
+; 			PrintN("  /L <line>      Set the cursor to the given line")
+; 			PrintN("  /NOEXT         Do not associate the PB extensions")
+; 			PrintN("  /PORTABLE      Place all settings in the program folder")
+; 			PrintN("")
+; 			PrintN("Building Projects:")
+; 			PrintN("  /BUILD <file>  Specify the project file to build")
+; 			PrintN("  /TARGET <name> Specify a target to build")
+; 			PrintN("  /QUIET         Only show errors during the build")
+; 			PrintN("  /READONLY      Do not update the project file after the build")
+; 			PrintN("")
+; 		CompilerElse
+; 			CompilerIf #SpiderBasic
+; 				PrintN("Usage: spiderbasic [options] files...")
+; 			CompilerElse
+; 				PrintN("Usage: purebasic [options] files...")
+; 			CompilerEndIf
+; 			PrintN("")
+; 			PrintN("Options:")
+; 			PrintN("  -v or --version             Display version information and quit")
+; 			PrintN("  -h or --help                Display commandline help")
+; 			PrintN("")
+; 			PrintN("Launching the IDE:")
+; 			PrintN("  -p or --preferences <file>  Specify a file for the IDE preferences")
+; 			PrintN("  -t or --templates <file>    Specify a file for code templates")
+; 			PrintN("  -a or --tools <file>        Specify a file for the tools settings")
+; 			PrintN("  -H or --history <file>      Specify a file for the session history database")
+; 			PrintN("  -s or --sourcepath <path>   Specify the initial path for source files")
+; 			PrintN("  -e or --explorerpath <path> Specify the initial path for the explorer tool")
+; 			PrintN("  -l or --line <line>         Set the cursor to the given line")
+; 			PrintN("")
+; 			PrintN("Building Projects:")
+; 			PrintN("  -b or --build <file>        Specify the project file to build")
+; 			PrintN("  -T or --target <name>       Specify a target to build")
+; 			PrintN("  -q or --quiet               Only show errors during the build")
+; 			PrintN("  -r or --readonly            Do not update the project file after the build")
+; 			PrintN("")
+; 		CompilerEndIf
+; 		
+; 		;CloseConsole()
 	EndProcedure
 	
 	Procedure parse_command_line()
@@ -32,10 +90,10 @@ Module Args : UseModule G
 		Define current_parameter.s
 		Define parameter_index.i = 0
 		Define parameters_count.i = CountProgramParameters()
-		
+		Debug "LE PARAM PATATE"
 		PB::xfor(parameter_index, 0, parameters_count)
 			current_parameter = ProgramParameter(parameter_index)
-			
+			Debug "PARAM: " + current_parameter
 			Select current_parameter
 				Case "--open-console"
 					OpenConsole(IDEConstants::#PROGRAM_NAME + " v. " + IDEConstants::#PROGRAM_VERSION)
@@ -63,6 +121,7 @@ Module Args : UseModule G
 					Settings::args\initial_source_line = Val(ProgramParameter(parameter_index))
 				Case "--build", "-b"
 					parameter_index + 1
+					State::set_mode(IDEEnums::#IDE_MODE_COMMAND_LINE_BUILD)
 					Settings::args\build_project_file = PBFileSystem::resolve_relative_path(working_directory, ProgramParameter(parameter_index))
 				Case "--target", "-T"
 					parameter_index + 1

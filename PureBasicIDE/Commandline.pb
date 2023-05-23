@@ -180,7 +180,7 @@ Procedure CommandlineVersion()
   Version$ + " [" + #BUILDINFO_Branch + "; " + #BUILDINFO_Revision + "; " + FormatDate("%dd-%mm-%yyyy]", #PB_Compiler_Date)
   Version$ + FormatDate(" - (c) %yyyy Fantaisie Software", #PB_Compiler_Date)
   PrintN(Version$)
-  CloseConsole()
+  ;CloseConsole()
 EndProcedure
 
 Procedure CommandlineHelp()
@@ -242,7 +242,7 @@ Procedure CommandlineHelp()
     PrintN("")
   CompilerEndIf
   
-  CloseConsole()
+  ;CloseConsole()
 EndProcedure
 
 

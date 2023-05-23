@@ -53,7 +53,7 @@ EndProcedure
 Procedure AddTools_ExecuteCurrent(Trigger, *Target.CompileTarget)
   
   ; If it is not a project target, the *Target is extended by the SourceFile struct
-  If CommandlineBuild = 0 And *Target And *Target\IsProject = 0 And *Target <> *ProjectInfo
+  If State::get_mode() = IDEEnums::#IDE_MODE_NORMAL And *Target And *Target\IsProject = 0 And *Target <> *ProjectInfo
     *Source.SourceFile = *Target
   Else
     *Source = 0
@@ -104,7 +104,7 @@ Procedure AddTools_ExecuteCurrent(Trigger, *Target.CompileTarget)
         ElseIf Trigger = #TRIGGER_SourceSave Or Trigger = #TRIGGER_SourceLoad Or Trigger = #TRIGGER_SourceClose ; no current source, or not saved. for SaveSource, we cannot save again as it will be an endless loop!
           ToolArguments$ = ReplaceString(ToolArguments$, "%FILE", *Target\FileName$, 1)
           
-        ElseIf CommandlineBuild = 0 And *Target = *ActiveSource
+        ElseIf State::get_mode() = IDEEnums::#IDE_MODE_NORMAL And *Target = *ActiveSource
           File$ = *Target\FileName$
           
           *CurrentElement = ToolsList()
@@ -221,7 +221,7 @@ Procedure AddTools_ExecuteCurrent(Trigger, *Target.CompileTarget)
     ; Display the run tool in the BuildLog (the function has a check to know if the buildlog is present)
     ;
     If Trigger = #TRIGGER_BeforeCreateExe Or Trigger = #TRIGGER_AfterCreateExe
-      If CommandlineBuild = 0
+      If State::get_mode() = IDEEnums::#IDE_MODE_NORMAL
         BuildLogEntry(Language("Compiler","BuildRunTool")+": "+ToolsList()\CommandLine$ + " " + ToolArguments$)
       ElseIf QuietBuild = 0
         PrintN(Language("Compiler","BuildRunTool")+": "+ToolsList()\CommandLine$ + " " + ToolArguments$)
@@ -333,7 +333,7 @@ Procedure AddTools_ExecuteCurrent(Trigger, *Target.CompileTarget)
     If ToolsList()\Flags & 1  ; wait until tool quits
       Flags | #PB_Program_Open; no wait flag, as we do this with ProgramRunning()
       
-      If CommandlineBuild = 0
+      If State::get_mode() = IDEEnums::#IDE_MODE_NORMAL
         If ToolsList()\HideEditor
           IsMaximized = IsWindowMaximized(#WINDOW_Main)
           HideWindow(#WINDOW_Main, 1)
@@ -345,7 +345,7 @@ Procedure AddTools_ExecuteCurrent(Trigger, *Target.CompileTarget)
       Program = RunProgram(CommandLine$, ToolArguments$, ToolWorkingDir$, Flags)
       
       If Program
-        If CommandlineBuild = 0
+        If State::get_mode() = IDEEnums::#IDE_MODE_NORMAL
           While WaitProgram(Program, 10) = 0
             FlushEvents()
           Wend
@@ -356,7 +356,7 @@ Procedure AddTools_ExecuteCurrent(Trigger, *Target.CompileTarget)
         CloseProgram(Program)
       EndIf
       
-      If CommandlineBuild = 0
+      If State::get_mode() = IDEEnums::#IDE_MODE_NORMAL
         If ToolsList()\HideEditor
           If IsMaximized
             ShowWindowMaximized(#WINDOW_Main)
@@ -369,7 +369,7 @@ Procedure AddTools_ExecuteCurrent(Trigger, *Target.CompileTarget)
       EndIf
       
       If File$ <> ""
-        If CommandlineBuild = 0 And ToolsList()\ReloadSource <> 0
+        If State::get_mode() = IDEEnums::#IDE_MODE_NORMAL And ToolsList()\ReloadSource <> 0
           If ToolsList()\ReloadSource = 1
             NewSource("", #False)
           EndIf
@@ -404,7 +404,7 @@ Procedure AddTools_ExecuteCurrent(Trigger, *Target.CompileTarget)
       RemoveEnvironmentVariable(EnvVars())
     Next EnvVars()
     
-    If CommandlineBuild = 0
+    If State::get_mode() = IDEEnums::#IDE_MODE_NORMAL
       CompilerIf #CompileWindows
         ; Note: The DisableWindow() command sents the IDE to the background, because the
         ; foreground app (the tool) ends while the IDE is still disabled, so it does not

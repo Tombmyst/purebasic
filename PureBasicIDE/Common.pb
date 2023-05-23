@@ -2711,7 +2711,7 @@ Global *DefaultTarget.CompileTarget
 Global *ProjectInfo.SourceFile ; the fake sourcefile in the File tab
 Global ProjectDebuggerID       ; unique ID of the current debugger for the project
 Global UseProjectBuildWindow
-Global CommandlineBuild, QuietBuild, CommandlineBuildSuccess
+Global QuietBuild, CommandlineBuildSuccess
 
 Global NewList ProjectFiles.ProjectFile()
 Global NewList ProjectConfig.ProjectFileConfig()    ; project files during configuration

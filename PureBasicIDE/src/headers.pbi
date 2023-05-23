@@ -25,6 +25,7 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "ide\theme\theme_constants.pb"
 	XIncludeFile "ide\tools\enums.pb"
 	XIncludeFile "xml\enums.pb"
+	XIncludeFile "ide\ide_enums.pb"
 
 	; -> should be after most of the constants imports because it uses other constants defined elsewhere
 	XIncludeFile "images\enums.pb"
@@ -32,7 +33,8 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	
 	XIncludeFile "fs\pbfs.pb"
 	XIncludeFile "fs\zip.pb"
-
+	
+	XIncludeFile "ide\state.pb"
 	XIncludeFile "ide\resources.pb"
 	XIncludeFile "ide\settings.pb"
 
@@ -63,6 +65,8 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "ide\diff.pb"
 	XIncludeFile "ide\debugger\debugger.pb"
 	
+	XIncludeFile "pb_compiler\command_line_build.pb"
+	
 	XIncludeFile "ui\toolbar.pb"
 	XIncludeFile "ui\statusbar.pb"
 	XIncludeFile "ui\menu.pb"
@@ -92,6 +96,7 @@ CompilerElse
 	XIncludeFile "ide/theme/theme_constants.pb"
 	XIncludeFile "ide/tools/enums.pb"
 	XIncludeFile "xml/enums.pb"
+	XIncludeFile "ide/ide_enums.pb"
 	
 	; -> should be after most of the constants imports because it uses other constants defined elsewhere
 	XIncludeFile "images/enums.pb"
@@ -100,6 +105,7 @@ CompilerElse
 	XIncludeFile "fs/pbfs.pb"
 	XIncludeFile "fs/zip.pb"
 	
+	XIncludeFile "ide/state.pb"
 	XIncludeFile "ide/resources.pb"
 	XIncludeFile "ide/settings.pb"
 	
@@ -129,6 +135,8 @@ CompilerElse
 	XIncludeFile "ide/issues_viewer.pb"
 	XIncludeFile "ide/diff.pb"
 	XIncludeFile "ide/debugger/debugger.pb"
+	
+	XIncludeFile "pb_compiler/command_line_build.pb"
 	
 	XIncludeFile "ui/toolbar.pb"
 	XIncludeFile "ui/statusbar.pb"
@@ -260,7 +268,7 @@ XIncludeFile ".." + Path::#SEPARATOR + "Preferences.pb"
 XIncludeFile ".." + Path::#SEPARATOR + "Preferences.pb"
 XIncludeFile ".." + Path::#SEPARATOR + "StandaloneDebuggerControl.pb"
 XIncludeFile ".." + Path::#SEPARATOR + "ErrorHandler.pb"
-XIncludeFile ".." + Path::#SEPARATOR + "Commandline.pb"
+;XIncludeFile ".." + Path::#SEPARATOR + "Commandline.pb"
 XIncludeFile ".." + Path::#SEPARATOR + "DiffAlgorithm.pb"
 XIncludeFile ".." + Path::#SEPARATOR + "DiffWindow.pb"
 XIncludeFile ".." + Path::#SEPARATOR + "LinuxHelp.pb"
