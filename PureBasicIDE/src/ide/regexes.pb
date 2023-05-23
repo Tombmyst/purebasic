@@ -6,14 +6,25 @@
 		#REGEX_FloatNumber
 		#REGEX_ScienceNumber
 	EndEnumeration
+	
+	Declare init()
+	Declare end_()
+	
+	Declare.i pb_compiler_path_regex()
 EndDeclareModule
 
 Module Regexes
+	_pb_compiler_path_regex.i = null
 	
+	Procedure init()
+		_pb_compiler_path_regex = PBRegex::create_regex("compilers[\/\\]?$")
+	EndProcedure
+	
+	Procedure end_()
+		PBRegex::safe_free_regex(_pb_compiler_path_regex)
+	EndProcedure
+	
+	Procedure.i pb_compiler_path_regex()
+		ProcedureReturn _pb_compiler_path_regex
+	EndProcedure
 EndModule
-; IDE Options = PureBasic 6.01 LTS (Windows - x64)
-; CursorPosition = 10
-; Folding = -
-; Optimizer
-; EnableXP
-; DPIAware

@@ -64,8 +64,9 @@ Module Logger
 	Global _logLevelConsole.b = LogLevel::#_SUCCESS
 	Global _logLevelFile.b = LogLevel::#_INFO
 	
-	Declare _log(level.b, message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1)
+	Declare _log(level.b, message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
 	Declare.s _produceLogString(level.b, message.s, fileName.s, moduleName.s, procedureName.s, lineNumber.i)
+	declare.s _produce_log_string_for_dialog(message.s, fileName.s, moduleName.s, procedureName.s, lineNumber.i)
 	Declare.s _logLevelToString(level.b)
 	Declare _logLevelToColor(level.b, *fore, *back)
 	Declare.s _handleFileModuleProcedureLineNumber(fileName.s, moduleName.s, procedureName.s, lineNumber.i)
@@ -138,7 +139,7 @@ Module Logger
 		_log(LogLevel::#_FATAL, message, fileName, moduleName, procedureName, lineNumber, show_dialog)
 	EndProcedure
 	
-	Procedure _log(level.b, message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog = false)
+	Procedure _log(level.b, message.s, fileName.s="", moduleName.s="", procedureName.s="", lineNumber.i=-1, show_dialog.boolean = false)
 		If Not _should_log(level)
 			ProcedureReturn
 		EndIf

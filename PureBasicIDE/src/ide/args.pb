@@ -98,6 +98,8 @@ Module Args : UseModule G
 				Case "--open-console"
 					OpenConsole(IDEConstants::#PROGRAM_NAME + " v. " + IDEConstants::#PROGRAM_VERSION)
 					Logger::useConsole()
+				Case "--reset-settings"
+					Settings::args\reset_settings = true
 				Case "--preferences", "-p"
 					parameter_index + 1
 					Settings::args\preferences_file = PBFileSystem::resolve_relative_path(working_directory, ProgramParameter(parameter_index))

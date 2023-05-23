@@ -8,7 +8,7 @@
 		CompilerEndIf
 	EndMacro
 	
-	Declare assert(condition.boolean, test_name.s)	
+	Declare assert(condition.boolean, test_name.s, file.s = "")	
 	Declare set_tests_failed()
 	Declare.boolean have_tests_failed()
 EndDeclareModule
@@ -16,7 +16,11 @@ EndDeclareModule
 Module Test
 	Global _failed.boolean = false
 	
-	Procedure assert(condition.boolean, test_name.s)
+	Procedure assert(condition.boolean, test_name.s, file.s = "")
+		If (file)
+			test_name = file + ": " + test_name
+		endif
+		
 		CompilerIf #PB_Compiler_Debugger
 			If (Not condition)
 				Logger::error("Test failed: " + test_name)

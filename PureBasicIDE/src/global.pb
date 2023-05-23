@@ -14,10 +14,6 @@ EndMacro
 ;
 #PUREBASIC_IDE = 1
 
-UseMD5Fingerprint()
-UseCRC32Fingerprint()
-UsePNGImageDecoder()
-
 DeclareModule G
 	Macro false : 0 : EndMacro
 	Macro true : 1 : EndMacro

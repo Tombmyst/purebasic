@@ -8,6 +8,7 @@ XIncludeFile "global.pb"
 CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "empire\empire.pb"
 	XIncludeFile "util\error_codes.pb"
+	XIncludeFile "util\regexes.pb"
 	XIncludeFile "util\crc32.pb"
 	XIncludeFile "util\macros.pb"
 	XIncludeFile "util\dialogs_util.pb"
@@ -72,6 +73,7 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 	XIncludeFile "ui\menu.pb"
 	
 	XIncludeFile "ide\args.pb"
+	XIncludeFile "ide\bootstrap.pb"
 	
 	;- APIs
 	XIncludeFile "api\tool_api.pb"
@@ -143,6 +145,7 @@ CompilerElse
 	XIncludeFile "ui/menu.pb"
 	
 	XIncludeFile "ide/args.pb"
+	XIncludeFile "ide/bootstrap.pb"
 	
 	;- APIs
 	XIncludeFile "api/tool_api.pb"

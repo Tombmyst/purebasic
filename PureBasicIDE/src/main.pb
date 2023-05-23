@@ -7,12 +7,17 @@ CompilerEndIf
 Procedure.boolean preinit()
 	Logger::trace("PreInit sequence")
 	
+	UseMD5Fingerprint()
+	UseCRC32Fingerprint()
+	UsePNGImageDecoder()
+	
 	ProcedureReturn true
 EndProcedure
 
 Procedure.boolean init()
 	Logger::trace("Init sequence")
 	Args::parse_command_line()
+	Settings::init()
 	
 	ProcedureReturn true
 EndProcedure
@@ -43,6 +48,7 @@ EndProcedure
 
 Procedure.boolean save()
 	Logger::trace("Save sequence")
+	Settings::save()
 	
 	ProcedureReturn true
 EndProcedure

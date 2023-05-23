@@ -1,5 +1,11 @@
 ﻿XIncludeFile "commons.pb"
 
+CompilerIf #PB_Compiler_OS = #PB_OS_Windows
+	XIncludeFile "pb\pbpp.pbi"
+CompilerElse
+	XIncludeFile "pb/pbpp.pbi"
+CompilerEndIf
+
 XIncludeFile "error_codes.pb"
 XIncludeFile "pb_helpers.pb"
 
